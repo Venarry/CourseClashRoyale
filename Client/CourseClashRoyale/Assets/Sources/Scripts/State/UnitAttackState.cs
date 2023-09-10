@@ -5,14 +5,14 @@ public class UnitAttackState : IState
 {
     private readonly StateMachine _stateMachine;
     private readonly Transform _transform;
-    private readonly UnitAttack _unitAttack;
+    private readonly UnitAnimationAttack _unitAttack;
     private readonly TargetProvider _targetProvider;
     private readonly float _disAttackRange;
 
     public UnitAttackState(
         StateMachine stateMachine, 
         Transform transform, 
-        UnitAttack unitAttack,
+        UnitAnimationAttack unitAttack,
         TargetProvider targetProvider, 
         float disAttackRange)
     {

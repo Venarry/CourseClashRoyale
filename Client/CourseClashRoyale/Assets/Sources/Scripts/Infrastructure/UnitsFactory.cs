@@ -25,16 +25,14 @@ public class UnitsFactory
         int baseDamage = 10;
         int damage = baseDamage + (baseDamage * level / reduceMultiplier);
 
-        float attackCooldown = 0.7f;
-
         UnitView unitView = Object.Instantiate(_unitViewPrefab, position, Quaternion.identity);
         TargetProvider targetProvider = new();
 
         BaseUnitAnimator baseUnitAnimator = unitView.GetComponent<BaseUnitAnimator>();
 
         NavMeshAgent navMeshAgent = unitView.GetComponent<NavMeshAgent>();
-        UnitAttack unitAttack = unitView.GetComponent<UnitAttack>();
-        unitAttack.Init(targetProvider, baseUnitAnimator, damage, attackCooldown);
+        UnitAnimationAttack unitAttack = unitView.GetComponent<UnitAnimationAttack>();
+        unitAttack.Init(targetProvider, baseUnitAnimator, damage);
 
         StateMachine stateMachine = unitView.gameObject.AddComponent<StateMachine>();
 
