@@ -8,6 +8,7 @@ public class TargetProvider
     public Vector3 TargetPosition =>
         _target.Transform.position;
 
+    public float Radius => _target.Radius;
     public bool HaveTarget => _target != null;
 
     public void SetTarget(ITarget target)

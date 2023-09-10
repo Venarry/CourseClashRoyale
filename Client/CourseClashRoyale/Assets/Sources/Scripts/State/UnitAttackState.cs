@@ -39,7 +39,8 @@ public class UnitAttackState : IState
         _transform.rotation = Quaternion
             .LookRotation(_targetProvider.TargetPosition - _transform.position);
 
-        if(Vector3.Distance(_transform.position, _targetProvider.TargetPosition) >= _disAttackRange)
+        if(Vector3.Distance(_transform.position, _targetProvider.TargetPosition) >= 
+            _disAttackRange + _targetProvider.Radius)
         {
             _stateMachine.Change<UnitWalkState>();
             return;

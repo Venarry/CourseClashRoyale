@@ -34,7 +34,10 @@ public class Bootstrapper : MonoBehaviour
             _camera.transform,
             isFriendly: false);
 
-        unitsFactory.CreateWarrior(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 1);
+        unitsFactory.CreateWarrior(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
+        unitsFactory.CreateWarrior(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
+        unitsFactory.CreateWarrior(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
+        unitsFactory.CreateWarrior(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
         unitsFactory.CreateWarrior(new Vector3(0,0,10), _camera.transform, isFriendly: false, 15);
     }
 }

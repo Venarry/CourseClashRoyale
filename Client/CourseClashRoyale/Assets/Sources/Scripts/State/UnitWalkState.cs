@@ -84,6 +84,8 @@ public class UnitWalkState : IState
         int collidesCount = Physics.OverlapSphereNonAlloc(
             _transform.position, _agroRadius, _colliders);
 
+        float minDistance = _agroRadius;
+
         for (int i = 0; i < collidesCount; i++)
         {
             if (_colliders[i].TryGetComponent(out ITarget target))
@@ -94,8 +96,14 @@ public class UnitWalkState : IState
                 if (target.IsFriendly == _isFriendly)
                     continue;
 
-                _target = target;
-                _targetProvider.SetTarget(_target);
+                float currentTargetDistance = Vector3
+                    .Distance(_transform.position, target.Transform.position);
+
+                if(currentTargetDistance <= minDistance)
+                {
+                    _target = target;
+                    _targetProvider.SetTarget(_target);
+                }
             }
         }
     }
