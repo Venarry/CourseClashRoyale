@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
+    [SerializeField] private GameObject _parent;
     [SerializeField] private Image _background;
     [SerializeField] private Image _progress;
 
@@ -50,7 +51,8 @@ public class ProgressBar : MonoBehaviour
 
     private void SetVisiable(bool state)
     {
-        _progress.enabled = state;
-        _background.enabled = state;
+        //_progress.enabled = state;
+        //_background.enabled = state;
+        _parent.SetActive(state);
     }
 }

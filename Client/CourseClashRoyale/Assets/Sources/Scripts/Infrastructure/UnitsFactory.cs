@@ -11,7 +11,7 @@ public class UnitsFactory
         _buildingsProvider = buildingsProvider;
     }
 
-    public UnitView CreateWarrior(
+    public UnitView CreateBarbarian(
         Vector3 position,
         Transform progressBarTarget, 
         bool isFriendly,
@@ -54,7 +54,7 @@ public class UnitsFactory
             availableTargetsProvider,
             unitView.transform,
             agroRadius: 5f,
-            attackDistance: 2f,
+            attackDistance: 1f,
             isFriendly);
 
         UnitAttackState attackState = new(
@@ -62,7 +62,7 @@ public class UnitsFactory
             unitAttack.transform, 
             unitAttack, 
             targetProvider,
-            disAttackRange: 2.5f);
+            disAttackRange: 1.5f);
 
         stateMachine.Register(targetChaseState);
         stateMachine.Register(attackState);

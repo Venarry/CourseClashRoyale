@@ -36,8 +36,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5195220515743922464}
   - {fileID: 6594119238698168118}
+  - {fileID: 5195220515743922464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e576db473f67f45a72826501a0420e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 1
+  _radius: 0.5
 --- !u!114 &5868610964119514423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16c9de7e0051384fbddb87696713d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lookAtRotator: {fileID: 1098633152533480085}
+  _lookAtRotator: {fileID: 7994526029189437051}
   _progressBar: {fileID: 4689582720243456156}
 --- !u!114 &4689582720243456156
 MonoBehaviour:
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28f2ae773f717c49a790a9a08ce4bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parent: {fileID: 6715257482958769065}
   _background: {fileID: 2804708213489569051}
   _progress: {fileID: 9185308791800298411}
 --- !u!195 &4955464075457805601
@@ -91,7 +92,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8243292198567643184}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 50
   avoidancePriority: 50
@@ -173,9 +174,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProgressBarCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6266510050235717902, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.68
+    - target: {fileID: 6388795830667562601, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8790643504265140443, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
       propertyPath: m_Pivot.x
@@ -187,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8790643504265140443, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8790643504265140443, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
       propertyPath: m_AnchorMax.x
@@ -263,17 +264,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
---- !u!114 &1098633152533480085 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4528548859044209518, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
-  m_PrefabInstance: {fileID: 3595986011494900219}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90696ca4ee3d914fad89de3e441225e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2804708213489569051 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1660651214830300384, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
@@ -290,6 +280,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8790643504265140443, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
   m_PrefabInstance: {fileID: 3595986011494900219}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6715257482958769065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7842703344495225426, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+  m_PrefabInstance: {fileID: 3595986011494900219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7994526029189437051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6851594788695586688, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+  m_PrefabInstance: {fileID: 3595986011494900219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90696ca4ee3d914fad89de3e441225e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9185308791800298411 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5665325572401273424, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
@@ -722,7 +728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400070, guid: 80eb9572fa9023d4783f58bde481a7b2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400070, guid: 80eb9572fa9023d4783f58bde481a7b2, type: 3}
       propertyPath: m_LocalPosition.x

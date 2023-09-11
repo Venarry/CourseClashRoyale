@@ -12,13 +12,17 @@ public class HealthView : MonoBehaviour
 
     public event Action HealthOver;
 
-    public void Init(HealthPresenter healthPresenter, Transform progressBarTarget, bool barCanHide)
+    public void Init(HealthPresenter healthPresenter,
+        Transform progressBarTarget,
+        bool barCanHide,
+        Color color)
     {
         gameObject.SetActive(false);
 
         _healthPresenter = healthPresenter;
-        _lookAtRotator.SetTarget(progressBarTarget, isInvert: true);
+        _lookAtRotator.SetTarget(progressBarTarget, isInvert: false);
         _healthBarCanHide = barCanHide;
+        _progressBar.SetColor(color);
         OnHealthChange();
         _isInitialized = true;
 
