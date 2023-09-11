@@ -24,7 +24,8 @@ public class TowersFactory
         HealthView healthView = mainTower.GetComponent<HealthView>();
 
         bool barCanHide = isFriendly;
-        healthView.Init(healthPresenter, progressBarTarget, barCanHide);
+        Color barColor = isFriendly ? GameConfig.FriendlyBarColor : GameConfig.EnemyBarColor;
+        healthView.Init(healthPresenter, progressBarTarget, barCanHide, barColor);
 
         mainTower.Init(isFriendly, type: TargetType.Ground);
         _buildingsProvider.Add(mainTower, isFriendly);

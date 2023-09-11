@@ -40,7 +40,8 @@ public class UnitsFactory
         HealthPresenter healthPresenter = new(healthModel);
 
         HealthView healthView = unitView.GetComponent<HealthView>();
-        healthView.Init(healthPresenter, progressBarTarget, barCanHide: true);
+        Color barColor = isFriendly ? GameConfig.FriendlyBarColor : GameConfig.EnemyBarColor;
+        healthView.Init(healthPresenter, progressBarTarget, barCanHide: true, barColor);
 
         AvailableTargetsProvider availableTargetsProvider = new();
         availableTargetsProvider.Register(TargetType.Ground, true);
