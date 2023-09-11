@@ -32,7 +32,7 @@ public class UnitAttackState : IState
     {
         if (_targetProvider.HaveTarget == false)
         {
-            _stateMachine.Change<UnitWalkState>();
+            _stateMachine.Change<UnitTargetChaseState>();
             return;
         }
 
@@ -42,7 +42,7 @@ public class UnitAttackState : IState
         if(Vector3.Distance(_transform.position, _targetProvider.TargetPosition) >= 
             _disAttackRange + _targetProvider.Radius)
         {
-            _stateMachine.Change<UnitWalkState>();
+            _stateMachine.Change<UnitTargetChaseState>();
             return;
         }
 

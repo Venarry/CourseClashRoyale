@@ -42,12 +42,16 @@ public class UnitsFactory
         HealthView healthView = unitView.GetComponent<HealthView>();
         healthView.Init(healthPresenter, progressBarTarget, barCanHide: true);
 
-        UnitWalkState walkState = new(
+        AvailableTargetsProvider availableTargetsProvider = new();
+        availableTargetsProvider.Register(TargetType.Ground, true);
+
+        UnitTargetChaseState targetChaseState = new(
             stateMachine, 
             targetProvider,
             navMeshAgent, 
             _buildingsProvider,
             baseUnitAnimator,
+            availableTargetsProvider,
             unitView.transform,
             agroRadius: 5f,
             attackDistance: 2f,
@@ -60,11 +64,11 @@ public class UnitsFactory
             targetProvider,
             disAttackRange: 2.5f);
 
-        stateMachine.Register(walkState);
+        stateMachine.Register(targetChaseState);
         stateMachine.Register(attackState);
-        stateMachine.Change<UnitWalkState>();
+        stateMachine.Change<UnitTargetChaseState>();
 
-        unitView.Init(isFriendly);
+        unitView.Init(isFriendly, type: TargetType.Ground);
 
         return unitView;
     }

@@ -26,7 +26,7 @@ public class TowersFactory
         bool barCanHide = isFriendly;
         healthView.Init(healthPresenter, progressBarTarget, barCanHide);
 
-        mainTower.Init(isFriendly);
+        mainTower.Init(isFriendly, type: TargetType.Ground);
         _buildingsProvider.Add(mainTower, isFriendly);
 
         return mainTower;

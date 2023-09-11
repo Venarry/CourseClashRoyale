@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UnitWalkState : IState
+public class UnitTargetChaseState : IState
 {
     private readonly Collider[] _colliders = new Collider[32];
     private readonly StateMachine _unitStateMachine;
@@ -10,18 +10,20 @@ public class UnitWalkState : IState
     private readonly NavMeshAgent _agent;
     private readonly BuildingsProvider _buildingsHolder;
     private readonly BaseUnitAnimator _unitAnimator;
+    private readonly AvailableTargetsProvider _availableTargetsProvider;
     private readonly Transform _transform;
     private readonly bool _isFriendly;
     private readonly float _agroRadius;
     private readonly float _attackDistance;
     private ITarget _target;
 
-    public UnitWalkState(
+    public UnitTargetChaseState(
         StateMachine unitStateMachine,
         TargetProvider targetProvider,
         NavMeshAgent navMeshAgent, 
         BuildingsProvider buildingsHolder,
         BaseUnitAnimator unitAnimator,
+        AvailableTargetsProvider availableTargetsProvider,
         Transform transform,
         float agroRadius,
         float attackDistance,
@@ -32,6 +34,7 @@ public class UnitWalkState : IState
         _agent = navMeshAgent;
         _buildingsHolder = buildingsHolder;
         _unitAnimator = unitAnimator;
+        _availableTargetsProvider = availableTargetsProvider;
         _transform = transform;
         _agroRadius = agroRadius;
         _attackDistance = attackDistance;
@@ -73,7 +76,7 @@ public class UnitWalkState : IState
 
         _agent.isStopped = false;
         _unitAnimator.SetWalkState(true);
-        _agent.stoppingDistance = _attackDistance;
+        //_agent.stoppingDistance = _attackDistance;
 
         _targetProvider.SetTarget(_target);
         _agent.SetDestination(_target.Transform.position);
@@ -85,6 +88,7 @@ public class UnitWalkState : IState
             _transform.position, _agroRadius, _colliders);
 
         float minDistance = _agroRadius;
+        ITarget bufferTarget = null;
 
         for (int i = 0; i < collidesCount; i++)
         {
@@ -96,15 +100,23 @@ public class UnitWalkState : IState
                 if (target.IsFriendly == _isFriendly)
                     continue;
 
+                if (_availableTargetsProvider.CanInteract(target) == false)
+                    continue;
+
                 float currentTargetDistance = Vector3
                     .Distance(_transform.position, target.Transform.position);
 
                 if(currentTargetDistance <= minDistance)
                 {
-                    _target = target;
-                    _targetProvider.SetTarget(_target);
+                    bufferTarget = target;
                 }
             }
+        }
+
+        if(bufferTarget != null)
+        {
+            _target = bufferTarget;
+            _targetProvider.SetTarget(_target);
         }
     }
 

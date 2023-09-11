@@ -9,13 +9,15 @@ public class UnitView : MonoBehaviour, ITarget
 
     public event Action<ITarget> Destroyed;
 
+    public TargetType Type { get; private set; }
     public float Radius => _radius;
     public bool IsFriendly { get; private set; }
     public Transform Transform => transform;
 
-    public void Init(bool isEnemy)
+    public void Init(bool isEnemy, TargetType type)
     {
         IsFriendly = isEnemy;
+        Type = type;
     }
 
     private void Awake()

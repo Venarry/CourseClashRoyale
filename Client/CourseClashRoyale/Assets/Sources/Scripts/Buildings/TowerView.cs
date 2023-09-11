@@ -9,6 +9,7 @@ public class TowerView : MonoBehaviour, ITarget
 
     public event Action<ITarget> Destroyed;
 
+    public TargetType Type { get; private set; }
     public Transform Transform => transform;
     public bool IsFriendly { get; private set; }
     public float Radius => 1f;
@@ -19,10 +20,11 @@ public class TowerView : MonoBehaviour, ITarget
         _healthView = GetComponent<HealthView>();
     }
 
-    public void Init(bool isEnemy)
+    public void Init(bool isEnemy, TargetType type)
     {
         gameObject.SetActive(false);
 
+        Type = type;
         IsFriendly = isEnemy;
         _isInitialized = true;
 
