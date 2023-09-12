@@ -123,7 +123,7 @@ public class UnitTargetChaseState : IState
     private void TryStartAttack()
     {
         if(Vector3.Distance(_transform.position, _target.Transform.position) <= 
-            _attackDistance + _target.Radius)
+            _attackDistance + _targetProvider.OurRadius)
         {
             _agent.isStopped = true;
             _targetProvider.SetTarget(_target);

@@ -11,6 +11,26 @@ public class UnitsFactory
         _buildingsProvider = buildingsProvider;
     }
 
+    public void CreateBarbarianStack(Vector3 position,
+        Transform progressBarTarget,
+        bool isFriendly,
+        int level)
+    {
+        float spawnOffset = 0.5f;
+
+        CreateBarbarian(position + new Vector3(spawnOffset, 0, spawnOffset),
+            progressBarTarget, isFriendly, level);
+
+        CreateBarbarian(position + new Vector3(spawnOffset, 0, -spawnOffset),
+            progressBarTarget, isFriendly, level);
+
+        CreateBarbarian(position + new Vector3(-spawnOffset, 0, spawnOffset),
+            progressBarTarget, isFriendly, level);
+
+        CreateBarbarian(position + new Vector3(-spawnOffset, 0, -spawnOffset),
+            progressBarTarget, isFriendly, level);
+    }
+
     public UnitView CreateBarbarian(
         Vector3 position,
         Transform progressBarTarget, 
@@ -25,14 +45,17 @@ public class UnitsFactory
         int baseDamage = 10;
         int damage = baseDamage + (baseDamage * level / reduceMultiplier);
 
+        float attackDistance = 0.5f;
+        float disAttackRange = 1f;
+
         UnitView unitView = Object.Instantiate(_unitViewPrefab, position, Quaternion.identity);
-        TargetProvider targetProvider = new();
+        TargetProvider targetProvider = new(unitView);
 
         BaseUnitAnimator baseUnitAnimator = unitView.GetComponent<BaseUnitAnimator>();
 
         NavMeshAgent navMeshAgent = unitView.GetComponent<NavMeshAgent>();
         UnitAnimationAttack unitAttack = unitView.GetComponent<UnitAnimationAttack>();
-        unitAttack.Init(targetProvider, baseUnitAnimator, damage);
+        unitAttack.Init(targetProvider, baseUnitAnimator, damage, disAttackRange);
 
         StateMachine stateMachine = unitView.gameObject.AddComponent<StateMachine>();
 
@@ -55,7 +78,7 @@ public class UnitsFactory
             availableTargetsProvider,
             unitView.transform,
             agroRadius: 5f,
-            attackDistance: 1f,
+            attackDistance,
             isFriendly);
 
         UnitAttackState attackState = new(
@@ -63,7 +86,7 @@ public class UnitsFactory
             unitAttack.transform, 
             unitAttack, 
             targetProvider,
-            disAttackRange: 1.5f);
+            disAttackRange);
 
         stateMachine.Register(targetChaseState);
         stateMachine.Register(attackState);

@@ -34,10 +34,16 @@ public class Bootstrapper : MonoBehaviour
             _camera.transform,
             isFriendly: false);
 
-        unitsFactory.CreateBarbarian(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
+        /*unitsFactory.CreateBarbarian(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
         unitsFactory.CreateBarbarian(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
         unitsFactory.CreateBarbarian(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
         unitsFactory.CreateBarbarian(new Vector3(0,0,10), _camera.transform, isFriendly: false, 15);
-        unitsFactory.CreateBarbarian(new Vector3(0,0,10), _camera.transform, isFriendly: false, 15);
+        unitsFactory.CreateBarbarian(new Vector3(0,0,10), _camera.transform, isFriendly: false, 15);*/
+
+        unitsFactory.CreateBarbarianStack(
+            new Vector3(0, 0, -10), _camera.transform, isFriendly: true, 3);
+
+        unitsFactory.CreateBarbarianStack(
+            new Vector3(0, 0, 10), _camera.transform, isFriendly: false, 15);
     }
 }

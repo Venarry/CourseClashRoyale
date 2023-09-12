@@ -37,10 +37,10 @@ public class UnitAttackState : IState
         }
 
         _transform.rotation = Quaternion
-            .LookRotation(_targetProvider.TargetPosition - _transform.position);
+            .LookRotation(_targetProvider.Position - _transform.position);
 
-        if(Vector3.Distance(_transform.position, _targetProvider.TargetPosition) >= 
-            _disAttackRange + _targetProvider.Radius)
+        if(Vector3.Distance(_transform.position, _targetProvider.Position) > 
+            _disAttackRange + _targetProvider.OurRadius)
         {
             _stateMachine.Change<UnitTargetChaseState>();
             return;

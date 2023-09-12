@@ -1,14 +1,19 @@
-using System;
 using UnityEngine;
 
 public class TargetProvider
 {
     private ITarget _target;
+    private readonly ITarget _myUnit;
 
-    public Vector3 TargetPosition =>
+    public TargetProvider(ITarget myUnit)
+    {
+        _myUnit = myUnit;
+    }
+
+    public Vector3 Position =>
         _target.Transform.position;
 
-    public float Radius => _target.Radius;
+    public float OurRadius => _target.Radius + _myUnit.Radius;
     public bool HaveTarget => _target != null;
 
     public void SetTarget(ITarget target)
