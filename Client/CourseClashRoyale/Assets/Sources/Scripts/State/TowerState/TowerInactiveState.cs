@@ -1,18 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TowerInactiveState : MonoBehaviour
+public class TowerInactiveState : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly StateMachine _stateMachine;
+    private readonly BuildingsProvider _buildingsProvider;
+    private readonly HealthPresenter _healthPresenter;
+
+    public TowerInactiveState(
+        StateMachine stateMachine,
+        BuildingsProvider buildingsProvider,
+        HealthPresenter healthPresenter)
     {
-        
+        _stateMachine = stateMachine;
+        _buildingsProvider = buildingsProvider;
+        _healthPresenter = healthPresenter;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Enter()
     {
-        
+        _buildingsProvider.FriendlyTowerDestroyed += OnFriendlyTowerDestroy;
+        _healthPresenter.HealthChanged += OnHealthChange;
+    }
+
+    public void Update()
+    {
+    }
+
+    public void Exit()
+    {
+        _buildingsProvider.FriendlyTowerDestroyed -= OnFriendlyTowerDestroy;
+        _healthPresenter.HealthChanged -= OnHealthChange;
+    }
+
+    private void OnHealthChange()
+    {
+        Disable();
+        GoToActiveState();
+    }
+
+    private void OnFriendlyTowerDestroy(ITarget target)
+    {
+        Disable();
+        GoToActiveState();
+    }
+
+    private void Disable()
+    {
+        _buildingsProvider.FriendlyTowerDestroyed -= OnFriendlyTowerDestroy;
+        _healthPresenter.HealthChanged -= OnHealthChange;
+    }
+
+    private void GoToActiveState()
+    {
+        _stateMachine.Change<TowerFindTargetState>();
     }
 }

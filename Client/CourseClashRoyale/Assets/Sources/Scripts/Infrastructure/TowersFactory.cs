@@ -10,26 +10,93 @@ public class TowersFactory
         _buildingsProvider = buildingsProvider;
     }
 
-    public TowerView CreateMainTower(
+    public TowerView CreateTower(
+        ProjectilesFactory projectilesFactory,
         Vector3 position,
         Quaternion rotation,
         Transform progressBarTarget,
-        bool isFriendly)
+        bool isFriendly,
+        bool isMainTower)
     {
-        TowerView mainTower = Object.Instantiate(_towerViewPrefab, position, rotation);
+        int health;
+        float attackRange;
+        int damage;
+        float cooldown;
 
-        HealthModel healthModel = new(maxValue: 100);
+        if (isMainTower)
+        {
+            health = 400;
+            damage = 60;
+            attackRange = 9;
+            cooldown = 0.5f;
+        }
+        else
+        {
+            health = 300;
+            damage = 35;
+            attackRange = 8;
+            cooldown = 0.6f;
+        }
+
+        float disAttackRange = attackRange + 0.5f;
+
+        TowerView tower = Object.Instantiate(_towerViewPrefab, position, rotation);
+
+        AvailableTargetsProvider availableTargetsProvider = new();
+        availableTargetsProvider.Register(TargetType.Ground, true);
+        availableTargetsProvider.Register(TargetType.Air, true);
+
+        TargetProvider targetProvider = new(tower);
+
+        HealthModel healthModel = new(health);
         HealthPresenter healthPresenter = new(healthModel);
 
-        HealthView healthView = mainTower.GetComponent<HealthView>();
+        HealthView healthView = tower.GetComponent<HealthView>();
 
         bool barCanHide = isFriendly;
         Color barColor = isFriendly ? GameConfig.FriendlyBarColor : GameConfig.EnemyBarColor;
         healthView.Init(healthPresenter, progressBarTarget, barCanHide, barColor);
 
-        mainTower.Init(isFriendly, type: TargetType.Ground);
-        _buildingsProvider.Add(mainTower, isFriendly);
+        TargetFinder targetFinder = new(availableTargetsProvider, targetProvider, tower.transform, isFriendly, attackRange);
+        StateMachine stateMachine = tower.GetComponent<StateMachine>();
 
-        return mainTower;
+        TowerFindTargetState towerFindTargetState = new(
+            stateMachine, targetProvider, targetFinder, tower.transform, attackRange);
+
+        TowerAttack towerAttack = tower.GetComponent<TowerAttack>();
+        towerAttack.Init(targetProvider, projectilesFactory, damage);
+
+        AttackByTimerInitiator attackByTimerInitiator = tower.GetComponent<AttackByTimerInitiator>();
+        attackByTimerInitiator.Init(towerAttack, cooldown);
+
+        AttackState<TowerFindTargetState> towerAttackState = new(
+            stateMachine,
+            targetProvider,
+            attackByTimerInitiator,
+            tower.transform,
+            tower.Head,
+            disAttackRange);
+
+        stateMachine.Register(towerFindTargetState);
+        stateMachine.Register(towerAttackState);
+
+        tower.Init(isFriendly, type: TargetType.Ground);
+        _buildingsProvider.Add(tower, isFriendly);
+
+
+        if (isMainTower == true)
+        {
+            TowerInactiveState towerInactiveState = new(
+                stateMachine, _buildingsProvider, healthPresenter);
+
+            stateMachine.Register(towerInactiveState);
+            stateMachine.Change<TowerInactiveState>();
+        }
+        else
+        {
+            stateMachine.Change<TowerFindTargetState>();
+        }
+
+        return tower;
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2287425546397609559}
   - component: {fileID: 8502728852071013742}
   - component: {fileID: 7235484806888179710}
-  - component: {fileID: 6416026549984449513}
+  - component: {fileID: 3230316208381051218}
   m_Layer: 0
   m_Name: Barbarian
   m_TagString: Untagged
@@ -151,7 +151,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6416026549984449513
+--- !u!114 &3230316208381051218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8243292198567643184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d822b937fa9af64dbabd1ded1f57329, type: 3}
+  m_Script: {fileID: 11500000, guid: e95c3fd893166ff4692c4d8abc5e7196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3595986011494900219

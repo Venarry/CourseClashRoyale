@@ -45,6 +45,7 @@ public class UnitsFactory
         int baseDamage = 10;
         int damage = baseDamage + (baseDamage * level / reduceMultiplier);
 
+        float agroRadius = 5f;
         float attackDistance = 0.5f;
         float disAttackRange = 1f;
 
@@ -54,7 +55,7 @@ public class UnitsFactory
         BaseUnitAnimator baseUnitAnimator = unitView.GetComponent<BaseUnitAnimator>();
 
         NavMeshAgent navMeshAgent = unitView.GetComponent<NavMeshAgent>();
-        UnitAnimationAttack unitAttack = unitView.GetComponent<UnitAnimationAttack>();
+        AttackByAnimation unitAttack = unitView.GetComponent<AttackByAnimation>();
         unitAttack.Init(targetProvider, baseUnitAnimator, damage, disAttackRange);
 
         StateMachine stateMachine = unitView.gameObject.AddComponent<StateMachine>();
@@ -69,23 +70,30 @@ public class UnitsFactory
         AvailableTargetsProvider availableTargetsProvider = new();
         availableTargetsProvider.Register(TargetType.Ground, true);
 
+        TargetFinder targetFinder = new(
+            availableTargetsProvider,
+            targetProvider,
+            unitView.transform,
+            isFriendly,
+            agroRadius);
+
         UnitTargetChaseState targetChaseState = new(
             stateMachine, 
             targetProvider,
             navMeshAgent, 
             _buildingsProvider,
             baseUnitAnimator,
-            availableTargetsProvider,
             unitView.transform,
-            agroRadius: 5f,
+            targetFinder,
             attackDistance,
             isFriendly);
 
-        UnitAttackState attackState = new(
+        AttackState<UnitTargetChaseState> attackState = new(
             stateMachine, 
-            unitAttack.transform, 
-            unitAttack, 
             targetProvider,
+            unitAttack, 
+            unitAttack.transform, 
+            unitAttack.transform, 
             disAttackRange);
 
         stateMachine.Register(targetChaseState);

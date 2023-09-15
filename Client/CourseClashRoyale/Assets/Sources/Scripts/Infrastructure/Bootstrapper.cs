@@ -10,35 +10,37 @@ public class Bootstrapper : MonoBehaviour
     {
         BuildingsProvider buildingsProvider = new();
 
+        ProjectilesFactory projectilesFactory = new();
+
         UnitsFactory unitsFactory = new();
         unitsFactory.Init(buildingsProvider);
 
         TowersFactory towersFactory = new();
         towersFactory.Init(buildingsProvider);
 
-        TowerView mainTower = towersFactory.CreateMainTower(
+        TowerView mainTower = towersFactory.CreateTower(
+            projectilesFactory,
             _mainTowerPoint.position, 
             _mainTowerPoint.rotation, 
             _camera.transform,
-            isFriendly: true);
+            isFriendly: true,
+            isMainTower: true);
 
-        TowerView tower = towersFactory.CreateMainTower(
-            _mainTowerPoint.position + new Vector3(5,0,0),
+        TowerView tower = towersFactory.CreateTower(
+            projectilesFactory,
+            _mainTowerPoint.position + new Vector3(-5,0,3),
             _mainTowerPoint.rotation,
             _camera.transform,
-            isFriendly: true);
+            isFriendly: true,
+            isMainTower: false);
 
-        TowerView enemyMainTower = towersFactory.CreateMainTower(
+        TowerView enemyMainTower = towersFactory.CreateTower(
+            projectilesFactory,
             _enemyMainTowerPoint.position, 
             _enemyMainTowerPoint.rotation, 
             _camera.transform,
-            isFriendly: false);
-
-        /*unitsFactory.CreateBarbarian(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
-        unitsFactory.CreateBarbarian(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
-        unitsFactory.CreateBarbarian(new Vector3(0,0,-10), _camera.transform, isFriendly: true, 3);
-        unitsFactory.CreateBarbarian(new Vector3(0,0,10), _camera.transform, isFriendly: false, 15);
-        unitsFactory.CreateBarbarian(new Vector3(0,0,10), _camera.transform, isFriendly: false, 15);*/
+            isFriendly: false,
+            isMainTower: true);
 
         unitsFactory.CreateBarbarianStack(
             new Vector3(0, 0, -10), _camera.transform, isFriendly: true, 3);

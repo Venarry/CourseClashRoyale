@@ -23,16 +23,16 @@ public class StateMachine : MonoBehaviour
 
         if (_states.TryGetValue(type, out IState state))
         {
-            _currentState?.ExitState();
+            _currentState?.Exit();
             _currentState = state;
         }
 
         _currentState = state;
-        _currentState.EnterState();
+        _currentState.Enter();
     }
 
     private void Update()
     {
-        _currentState?.UpdateState();
+        _currentState?.Update();
     }
 }
