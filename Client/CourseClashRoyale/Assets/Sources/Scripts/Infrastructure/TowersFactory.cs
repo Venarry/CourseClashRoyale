@@ -43,8 +43,8 @@ public class TowersFactory
         TowerView tower = Object.Instantiate(_towerViewPrefab, position, rotation);
 
         AvailableTargetsProvider availableTargetsProvider = new();
-        availableTargetsProvider.Register(TargetType.GroundUnit, true);
-        availableTargetsProvider.Register(TargetType.AirUnit, true);
+        availableTargetsProvider.Register(UnitType.GroundUnit, true);
+        availableTargetsProvider.Register(UnitType.AirUnit, true);
 
         TargetProvider targetProvider = new(tower);
 
@@ -87,7 +87,7 @@ public class TowersFactory
         stateMachine.Register(towerFindTargetState);
         stateMachine.Register(attackState);
 
-        tower.Init(isFriendly, type: TargetType.Tower);
+        tower.Init(isFriendly, type: UnitType.Tower);
         _buildingsProvider.Add(tower, isFriendly);
 
 

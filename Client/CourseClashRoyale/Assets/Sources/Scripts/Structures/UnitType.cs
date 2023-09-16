@@ -1,4 +1,4 @@
-public enum TargetType
+public enum UnitType
 {
     GroundUnit,
     AirUnit,

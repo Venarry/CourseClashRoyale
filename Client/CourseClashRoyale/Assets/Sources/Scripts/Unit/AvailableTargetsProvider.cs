@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 public class AvailableTargetsProvider
 {
-    private readonly Dictionary<TargetType, bool> _availableTargets = new();
+    private readonly Dictionary<UnitType, bool> _availableTargets = new();
 
-    public void Register(TargetType type, bool canInteract)
+    public void Register(UnitType type, bool canInteract)
     {
         if(_availableTargets.ContainsKey(type) == false)
         {
@@ -18,7 +18,7 @@ public class AvailableTargetsProvider
 
     public bool CanInteract(ITarget target)
     {
-        TargetType targetType = target.Type;
+        UnitType targetType = target.Type;
 
         if (_availableTargets.ContainsKey(targetType) == false)
         {
