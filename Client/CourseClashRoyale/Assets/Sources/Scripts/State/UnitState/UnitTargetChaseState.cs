@@ -7,33 +7,27 @@ public class UnitTargetChaseState : IState
     private readonly StateMachine _unitStateMachine;
     private readonly TargetProvider _targetProvider;
     private readonly NavMeshAgent _agent;
-    private readonly BuildingsProvider _buildingsHolder;
     private readonly BaseUnitAnimator _unitAnimator;
     private readonly Transform _transform;
     private readonly TargetFinder _targetFinder;
-    private readonly bool _isFriendly;
     private readonly float _attackDistance;
 
     public UnitTargetChaseState(
         StateMachine unitStateMachine,
         TargetProvider targetProvider,
         NavMeshAgent navMeshAgent, 
-        BuildingsProvider buildingsHolder,
         BaseUnitAnimator unitAnimator,
         Transform transform,
         TargetFinder targetFinder,
-        float attackDistance,
-        bool isFriendly)
+        float attackDistance)
     {
         _unitStateMachine = unitStateMachine;
         _targetProvider = targetProvider;
         _agent = navMeshAgent;
-        _buildingsHolder = buildingsHolder;
         _unitAnimator = unitAnimator;
         _transform = transform;
         _targetFinder = targetFinder;
         _attackDistance = attackDistance;
-        _isFriendly = isFriendly;
     }
 
     public void Enter()
@@ -48,6 +42,7 @@ public class UnitTargetChaseState : IState
         if (_targetProvider.HaveTarget == false)
         {
             _unitAnimator.SetWalkState(false);
+            TryFindTower();
             return;
         }
 
@@ -63,22 +58,20 @@ public class UnitTargetChaseState : IState
 
     private void TryFindTower()
     {
-        if (_buildingsHolder
-            .TryFindNearestBuilding(_transform.position, _isFriendly == false, out ITarget target) == false)
+        if (_targetFinder.TryFindNearestTower() == false)
         {
             return;
         }
 
-        _agent.isStopped = false;
-        _unitAnimator.SetWalkState(true);
-
-        _targetProvider.SetTarget(target);
-        _agent.SetDestination(target.Transform.position);
+        ActivateUnit();
     }
 
     private void TryFindNewTarget()
     {
-        _targetFinder.Find();
+        if (_targetFinder.TryFindNearestUnit() == false)
+            return;
+
+        ActivateUnit();
     }
 
     private void TryStartAttack()
@@ -89,5 +82,12 @@ public class UnitTargetChaseState : IState
             _agent.isStopped = true;
             _unitStateMachine.Change<AttackState<UnitTargetChaseState>>();
         }
+    }
+
+    private void ActivateUnit()
+    {
+        _agent.isStopped = false;
+        _unitAnimator.SetWalkState(true);
+        _agent.SetDestination(_targetProvider.Position);
     }
 }

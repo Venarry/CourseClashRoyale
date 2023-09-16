@@ -31,7 +31,7 @@ public class TowerFindTargetState : IState
 
     public void Update()
     {
-        _targetFinder.Find();
+        _targetFinder.TryFindNearestUnit();
 
         if (_targetProvider.HaveTarget == false)
         {

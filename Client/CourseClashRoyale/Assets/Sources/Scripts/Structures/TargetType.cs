@@ -1,5 +1,7 @@
 public enum TargetType
 {
-    Ground,
-    Air,
+    GroundUnit,
+    AirUnit,
+    UndergroundUnit,
+    Tower,
 }

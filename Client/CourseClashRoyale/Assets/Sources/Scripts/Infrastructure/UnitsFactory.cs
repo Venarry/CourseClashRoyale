@@ -47,7 +47,7 @@ public class UnitsFactory
 
         float agroRadius = 5f;
         float attackDistance = 0.5f;
-        float disAttackRange = 1f;
+        float disAttackRange = attackDistance + 0.5f;
 
         UnitView unitView = Object.Instantiate(_unitViewPrefab, position, Quaternion.identity);
         TargetProvider targetProvider = new(unitView);
@@ -68,11 +68,13 @@ public class UnitsFactory
         healthView.Init(healthPresenter, progressBarTarget, barCanHide: true, barColor);
 
         AvailableTargetsProvider availableTargetsProvider = new();
-        availableTargetsProvider.Register(TargetType.Ground, true);
+        availableTargetsProvider.Register(TargetType.GroundUnit, true);
+        availableTargetsProvider.Register(TargetType.Tower, true);
 
         TargetFinder targetFinder = new(
             availableTargetsProvider,
             targetProvider,
+            _buildingsProvider,
             unitView.transform,
             isFriendly,
             agroRadius);
@@ -81,12 +83,10 @@ public class UnitsFactory
             stateMachine, 
             targetProvider,
             navMeshAgent, 
-            _buildingsProvider,
             baseUnitAnimator,
             unitView.transform,
             targetFinder,
-            attackDistance,
-            isFriendly);
+            attackDistance);
 
         AttackState<UnitTargetChaseState> attackState = new(
             stateMachine, 
@@ -100,7 +100,7 @@ public class UnitsFactory
         stateMachine.Register(attackState);
         stateMachine.Change<UnitTargetChaseState>();
 
-        unitView.Init(isFriendly, type: TargetType.Ground);
+        unitView.Init(isFriendly, type: TargetType.GroundUnit);
 
         return unitView;
     }

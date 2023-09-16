@@ -9,7 +9,6 @@ public class Bootstrapper : MonoBehaviour
     private void Awake()
     {
         BuildingsProvider buildingsProvider = new();
-
         ProjectilesFactory projectilesFactory = new();
 
         UnitsFactory unitsFactory = new();

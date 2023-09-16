@@ -43,8 +43,8 @@ public class TowersFactory
         TowerView tower = Object.Instantiate(_towerViewPrefab, position, rotation);
 
         AvailableTargetsProvider availableTargetsProvider = new();
-        availableTargetsProvider.Register(TargetType.Ground, true);
-        availableTargetsProvider.Register(TargetType.Air, true);
+        availableTargetsProvider.Register(TargetType.GroundUnit, true);
+        availableTargetsProvider.Register(TargetType.AirUnit, true);
 
         TargetProvider targetProvider = new(tower);
 
@@ -57,7 +57,14 @@ public class TowersFactory
         Color barColor = isFriendly ? GameConfig.FriendlyBarColor : GameConfig.EnemyBarColor;
         healthView.Init(healthPresenter, progressBarTarget, barCanHide, barColor);
 
-        TargetFinder targetFinder = new(availableTargetsProvider, targetProvider, tower.transform, isFriendly, attackRange);
+        TargetFinder targetFinder = new(
+            availableTargetsProvider,
+            targetProvider,
+            _buildingsProvider,
+            tower.transform,
+            isFriendly,
+            attackRange);
+
         StateMachine stateMachine = tower.GetComponent<StateMachine>();
 
         TowerFindTargetState towerFindTargetState = new(
@@ -69,7 +76,7 @@ public class TowersFactory
         AttackByTimerInitiator attackByTimerInitiator = tower.GetComponent<AttackByTimerInitiator>();
         attackByTimerInitiator.Init(towerAttack, cooldown);
 
-        AttackState<TowerFindTargetState> towerAttackState = new(
+        AttackState<TowerFindTargetState> attackState = new(
             stateMachine,
             targetProvider,
             attackByTimerInitiator,
@@ -78,9 +85,9 @@ public class TowersFactory
             disAttackRange);
 
         stateMachine.Register(towerFindTargetState);
-        stateMachine.Register(towerAttackState);
+        stateMachine.Register(attackState);
 
-        tower.Init(isFriendly, type: TargetType.Ground);
+        tower.Init(isFriendly, type: TargetType.Tower);
         _buildingsProvider.Add(tower, isFriendly);
 
 
