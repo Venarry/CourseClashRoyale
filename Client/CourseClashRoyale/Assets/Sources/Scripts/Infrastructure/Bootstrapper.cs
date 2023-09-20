@@ -46,5 +46,11 @@ public class Bootstrapper : MonoBehaviour
 
         unitsFactory.CreateBarbarianStack(
             new Vector3(0, 0, 10), _camera.transform, isFriendly: false, 15);
+
+        unitsFactory.CreateDragonInferno(
+            new Vector3(0, 0, -10), _camera.transform, isFriendly: true, 5);
+
+        unitsFactory.CreateDragonInferno(
+            new Vector3(0, 0, 10), _camera.transform, isFriendly: false, 15);
     }
 }

@@ -70,7 +70,7 @@ public class TowersFactory
         TowerFindTargetState towerFindTargetState = new(
             stateMachine, targetProvider, targetFinder, tower.transform, attackRange);
 
-        TowerAttack towerAttack = tower.GetComponent<TowerAttack>();
+        ProjectileAttack towerAttack = tower.GetComponent<ProjectileAttack>();
         towerAttack.Init(targetProvider, projectilesFactory, damage);
 
         AttackByTimerInitiator attackByTimerInitiator = tower.GetComponent<AttackByTimerInitiator>();

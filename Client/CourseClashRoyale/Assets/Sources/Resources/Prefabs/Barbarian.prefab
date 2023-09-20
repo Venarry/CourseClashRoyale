@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 790146771580522214}
   - component: {fileID: 5868610964119514423}
   - component: {fileID: 4689582720243456156}
+  - component: {fileID: 8502728852071013742}
+  - component: {fileID: 3230316208381051218}
+  - component: {fileID: 7235484806888179710}
   - component: {fileID: 4955464075457805601}
   - component: {fileID: 2287425546397609559}
-  - component: {fileID: 8502728852071013742}
-  - component: {fileID: 7235484806888179710}
-  - component: {fileID: 3230316208381051218}
   m_Layer: 0
   m_Name: Barbarian
   m_TagString: Untagged
@@ -83,6 +83,51 @@ MonoBehaviour:
   _parent: {fileID: 6715257482958769065}
   _background: {fileID: 2804708213489569051}
   _progress: {fileID: 9185308791800298411}
+--- !u!114 &8502728852071013742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243292198567643184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2fdfbaa0b8a244481663ab426a69ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 7235484806888179710}
+--- !u!114 &3230316208381051218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243292198567643184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95c3fd893166ff4692c4d8abc5e7196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &7235484806888179710
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243292198567643184}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: f2b6f64ec23092a4fbe12d90b4535537, type: 3}
+  m_Controller: {fileID: 9100000, guid: 57c7e5b4f50ddf146bdf7774fd6eaefa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!195 &4955464075457805601
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -118,51 +163,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &8502728852071013742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8243292198567643184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2fdfbaa0b8a244481663ab426a69ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 7235484806888179710}
---- !u!95 &7235484806888179710
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8243292198567643184}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f2b6f64ec23092a4fbe12d90b4535537, type: 3}
-  m_Controller: {fileID: 9100000, guid: 57c7e5b4f50ddf146bdf7774fd6eaefa, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3230316208381051218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8243292198567643184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95c3fd893166ff4692c4d8abc5e7196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3595986011494900219
 PrefabInstance:
   m_ObjectHideFlags: 0

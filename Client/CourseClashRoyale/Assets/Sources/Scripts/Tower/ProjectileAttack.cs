@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TowerAttack : MonoBehaviour, IAttack
+public class ProjectileAttack : MonoBehaviour, IAttack
 {
     [SerializeField] private Transform _shootPoint;
 

@@ -3,8 +3,11 @@ using UnityEngine.AI;
 
 public class UnitsFactory
 {
-    private readonly UnitView _unitViewPrefab = Resources.Load<UnitView>(FilesPath.Barbarian);
+    private readonly UnitView _barbarianPrefab = Resources.Load<UnitView>(FilesPath.Barbarian);
+    private readonly UnitView _dragonInfernoPrefab = Resources.Load<UnitView>(FilesPath.DragonInferno);
     private BuildingsProvider _buildingsProvider;
+
+    private int _reduceMultiplier => GameConfig.LevelStrengthReduceMultiplier;
 
     public void Init(BuildingsProvider buildingsProvider)
     {
@@ -37,19 +40,17 @@ public class UnitsFactory
         bool isFriendly,
         int level)
     {
-        int reduceMultiplier = GameConfig.LevelStrengthReduceMultiplier;
-
         int baseHealth = 100;
-        int targetHealth = baseHealth + (baseHealth * level / reduceMultiplier);
+        int targetHealth = baseHealth + (baseHealth * level / _reduceMultiplier);
 
         int baseDamage = 10;
-        int targetDamage = baseDamage + (baseDamage * level / reduceMultiplier);
+        int targetDamage = baseDamage + (baseDamage * level / _reduceMultiplier);
 
         float agroRadius = 5f;
         float attackRange = 0.5f;
         float disAttackRange = attackRange + 0.5f;
 
-        UnitView unitView = Object.Instantiate(_unitViewPrefab, position, Quaternion.identity);
+        UnitView unitView = Object.Instantiate(_barbarianPrefab, position, Quaternion.identity);
         BuildAttackUnit(
             unitView,
             targetDamage,
@@ -114,6 +115,38 @@ public class UnitsFactory
 
         unitView.Init(isFriendly, type: UnitType.GroundUnit);
         */
+        return unitView;
+    }
+
+    public UnitView CreateDragonInferno(
+        Vector3 position,
+        Transform progressBarTarget,
+        bool isFriendly,
+        int level)
+    {
+        int baseHealth = 350;
+        int targetHealth = baseHealth + (baseHealth * level / _reduceMultiplier);
+
+        int baseDamage = 35;
+        int targetDamage = baseDamage + (baseDamage * level / _reduceMultiplier);
+
+        float agroRadius = 6f;
+        float attackRange = 3f;
+        float disAttackRange = attackRange + 0.5f;
+
+        UnitView unitView = Object.Instantiate(_dragonInfernoPrefab, position, Quaternion.identity);
+        BuildAttackUnit(
+            unitView,
+            targetDamage,
+            attackRange,
+            disAttackRange,
+            agroRadius,
+            targetHealth,
+            isFriendly,
+            progressBarTarget,
+            UnitType.AirUnit,
+            new UnitType[] { UnitType.GroundUnit, UnitType.Tower, UnitType.AirUnit });
+
         return unitView;
     }
 
