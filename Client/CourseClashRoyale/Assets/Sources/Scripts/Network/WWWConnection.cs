@@ -6,27 +6,27 @@ using UnityEngine.Networking;
 
 public class WWWConnection : MonoBehaviour
 {
-    public static WWWConnection Instance;
+    private static WWWConnection _instance;
 
     private void Awake()
     {
-        if(Instance != null)
+        if(_instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        _instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Post(string uri,
+    public static void Post(string uri,
         Dictionary<string, string> data,
         Action<string> success = null,
         Action<string> error = null) =>
-        StartCoroutine(MakePostRequest(uri, data, success, error));
+        _instance.StartCoroutine(MakePostRequest(uri, data, success, error));
 
-    private IEnumerator MakePostRequest(
+    private static IEnumerator MakePostRequest(
         string uri,
         Dictionary<string, string> data,
         Action<string> success = null,
