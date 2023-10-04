@@ -93,7 +93,7 @@ public class AuthentifiactionView : MonoBehaviour
 
             Dictionary<string, string> data = new()
             {
-                { "game", "clash_royale_data" },
+                { "tableName", "clash_royale_data" },
                 { "id", id.ToString() },
             };
 
