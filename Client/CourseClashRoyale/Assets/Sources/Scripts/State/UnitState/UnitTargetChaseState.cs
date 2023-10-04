@@ -7,7 +7,7 @@ public class UnitTargetChaseState : IState
     private readonly StateMachine _unitStateMachine;
     private readonly TargetProvider _targetProvider;
     private readonly NavMeshAgent _agent;
-    private readonly BaseUnitAnimator _unitAnimator;
+    private readonly UnitAttackAnimator _unitAnimator;
     private readonly Transform _transform;
     private readonly TargetFinder _targetFinder;
     private readonly float _attackDistance;
@@ -16,7 +16,7 @@ public class UnitTargetChaseState : IState
         StateMachine unitStateMachine,
         TargetProvider targetProvider,
         NavMeshAgent navMeshAgent, 
-        BaseUnitAnimator unitAnimator,
+        UnitAttackAnimator unitAnimator,
         Transform transform,
         TargetFinder targetFinder,
         float attackDistance)

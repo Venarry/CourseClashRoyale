@@ -163,10 +163,10 @@ public class UnitsFactory
     {
         TargetProvider targetProvider = new(unitView);
 
-        BaseUnitAnimator baseUnitAnimator = unitView.GetComponent<BaseUnitAnimator>();
+        UnitAttackAnimator baseUnitAnimator = unitView.GetComponent<UnitAttackAnimator>();
 
         NavMeshAgent navMeshAgent = unitView.GetComponent<NavMeshAgent>();
-        AttackByAnimation unitAttack = unitView.GetComponent<AttackByAnimation>();
+        AttackByAnimationInitiator unitAttack = unitView.GetComponent<AttackByAnimationInitiator>();
         unitAttack.Init(targetProvider, baseUnitAnimator, damage, disAttackRange);
 
         StateMachine stateMachine = unitView.gameObject.AddComponent<StateMachine>();

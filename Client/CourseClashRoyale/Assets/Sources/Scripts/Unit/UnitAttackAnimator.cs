@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BaseUnitAnimator : MonoBehaviour
+public class UnitAttackAnimator : MonoBehaviour
 {
     private readonly int _animatorWalk = Animator.StringToHash("Walk");
     private readonly int _animatorAttack = Animator.StringToHash("Attack");

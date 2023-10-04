@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
-public class AttackByAnimation : MonoBehaviour, IAttack
+public class AttackByAnimationInitiator : MonoBehaviour, IAttack
 {
     private TargetProvider _targetProvider;
-    private BaseUnitAnimator _animator;
+    private UnitAttackAnimator _animator;
     private int _damage;
     private float _attackDistance;
     private bool _canAttack = true;
 
     public void Init(
         TargetProvider targetProvider,
-        BaseUnitAnimator animator,
+        UnitAttackAnimator animator,
         int damage,
         float attackDistance)
     {
