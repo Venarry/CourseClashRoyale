@@ -117,5 +117,12 @@ public class AuthentifiactionView : MonoBehaviour
     private void OnGetDataRequestSuccess(string data)
     {
         Debug.Log(data);
+
+        if (string.IsNullOrEmpty(data))
+        {
+            return;
+        }
+
+        UserDataProvider.UserData = JsonUtility.FromJson<UserData>(data);
     }
 }
