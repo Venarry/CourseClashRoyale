@@ -45,8 +45,6 @@ public class AuthentifiactionView : MonoBehaviour
     {
         if(int.TryParse(callback, out int id))
         {
-            Debug.Log(id);
-
             Dictionary<string, string> data = new()
             {
                 { "tableName", "clash_royale_data" },
@@ -82,6 +80,14 @@ public class AuthentifiactionView : MonoBehaviour
         }
 
         UserData userData = JsonUtility.FromJson<UserData>(data);
+
+        foreach (Deck deck in userData.Decks)
+        {
+            foreach (var card in deck.C)
+            {
+                Debug.Log(card.Id);
+            }
+        }
         _userDataProvider.SetUserData(userData);
     }
 }

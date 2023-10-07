@@ -10,11 +10,28 @@ public class UserData
     public Card[] AvailableCards =
         new Card[] 
         { 
-            new Card(1), new Card(2), new Card(3), new Card(4), new Card(5), new Card(6), new Card(7), new Card(8), new Card(9), new Card(10) 
+            new Card(1),
+            new Card(2),
+            new Card(3),
+            new Card(4),
+            new Card(5),
+            new Card(6),
+            new Card(7),
+            new Card(8),
+            new Card(9),
+            new Card(10),
         };
-    public Deck[] Decks = new Deck[] 
-    { 
-        new Deck(1, 2, 3, 4, 5, 6, 7, 10),
+    public Deck[] Decks = new Deck[]
+    {
+        new Deck(
+            new Card(1),
+            new Card(2),
+            new Card(3),
+            new Card(4),
+            new Card(5),
+            new Card(6),
+            new Card(7),
+            new Card(8)),
     };
 }
 
@@ -36,12 +53,21 @@ public class Card
 [System.Serializable]
 public class Deck
 {
-    public int[] C;
+    public Card[] C;
 
-    public Deck(params int[] cards)
+    public Deck(params Card[] cards)
     {
         C = cards;
     }
 
-    public bool Contains(int id) => C.Contains(id);
+    public bool Contains(int id)
+    {
+        foreach (var card in C)
+        {
+            if (card.Id == id)
+                return true;
+        }
+
+        return false;
+    }
 }

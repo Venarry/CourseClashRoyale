@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardsDataSource : MonoBehaviour
+public class CardsDataSource
 {
     private readonly Dictionary<int, Sprite> _cardsIcon;
     private readonly Dictionary<int, int> _cardsPrice;

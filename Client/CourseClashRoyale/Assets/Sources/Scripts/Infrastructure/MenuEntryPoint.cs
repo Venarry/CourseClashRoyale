@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuEntryPoint : MonoBehaviour
 {
@@ -12,5 +13,13 @@ public class MenuEntryPoint : MonoBehaviour
         CardFactory cardFactory = new(cardsDataSource);
 
         _cardsView.Init(cardFactory);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Menu");
+        }
     }
 }

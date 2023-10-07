@@ -37,6 +37,7 @@ public class MenuCardsView : MonoBehaviour
 
         Card[] cards = _userDataProvider.AvailableCards;
         Deck[] decks = _userDataProvider.Decks;
+        Debug.Log(_userDataProvider);
 
         int deckCounter = 0;
 
