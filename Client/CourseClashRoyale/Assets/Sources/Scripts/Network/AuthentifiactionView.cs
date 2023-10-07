@@ -81,6 +81,7 @@ public class AuthentifiactionView : MonoBehaviour
             return;
         }
 
-        _userDataProvider.SetUserData(JsonUtility.FromJson<UserData>(data));
+        UserData userData = JsonUtility.FromJson<UserData>(data);
+        _userDataProvider.SetUserData(userData);
     }
 }
