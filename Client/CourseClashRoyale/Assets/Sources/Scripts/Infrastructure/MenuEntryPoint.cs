@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private MenuCardsView _cardsView;
+    private SceneLoader _sceneLoader;
 
     private void Awake()
     {
@@ -13,13 +14,17 @@ public class MenuEntryPoint : MonoBehaviour
         CardFactory cardFactory = new(cardsDataSource);
 
         _cardsView.Init(cardFactory);
+
+        _sceneLoader = FindObjectOfType<SceneLoader>() 
+            ?? new GameObject(nameof(SceneLoader))
+            .AddComponent<SceneLoader>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            SceneManager.LoadScene("Menu");
+            _sceneLoader.LoadScene("GameMap", "deck");
         }
     }
 }

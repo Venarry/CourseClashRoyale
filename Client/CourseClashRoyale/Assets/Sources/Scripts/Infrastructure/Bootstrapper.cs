@@ -6,8 +6,10 @@ public class Bootstrapper : MonoBehaviour
     [SerializeField] private Transform _enemyMainTowerPoint;
     [SerializeField] private Camera _camera;
 
-    private void Awake()
+    public void Init(string deck)
     {
+        Debug.Log(deck);
+
         BuildingsProvider buildingsProvider = new();
         ProjectilesFactory projectilesFactory = new();
 
@@ -19,15 +21,15 @@ public class Bootstrapper : MonoBehaviour
 
         TowerView mainTower = towersFactory.CreateTower(
             projectilesFactory,
-            _mainTowerPoint.position, 
-            _mainTowerPoint.rotation, 
+            _mainTowerPoint.position,
+            _mainTowerPoint.rotation,
             _camera.transform,
             isFriendly: true,
             isMainTower: true);
 
         TowerView tower = towersFactory.CreateTower(
             projectilesFactory,
-            _mainTowerPoint.position + new Vector3(-5,0,3),
+            _mainTowerPoint.position + new Vector3(-5, 0, 3),
             _mainTowerPoint.rotation,
             _camera.transform,
             isFriendly: true,
@@ -35,8 +37,8 @@ public class Bootstrapper : MonoBehaviour
 
         TowerView enemyMainTower = towersFactory.CreateTower(
             projectilesFactory,
-            _enemyMainTowerPoint.position, 
-            _enemyMainTowerPoint.rotation, 
+            _enemyMainTowerPoint.position,
+            _enemyMainTowerPoint.rotation,
             _camera.transform,
             isFriendly: false,
             isMainTower: true);
@@ -52,5 +54,11 @@ public class Bootstrapper : MonoBehaviour
 
         unitsFactory.CreateDragonInferno(
             new Vector3(0, 0, 10), _camera.transform, isFriendly: false, 15);
+    }
+
+    private void Awake()
+    {
+        if(FindObjectOfType<SceneLoader>() == null)
+            Init("awake");
     }
 }

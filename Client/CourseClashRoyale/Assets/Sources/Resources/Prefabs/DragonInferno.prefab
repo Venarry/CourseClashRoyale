@@ -2943,11 +2943,11 @@ GameObject:
   - component: {fileID: 1492685435813879153}
   - component: {fileID: 1492685435813879155}
   - component: {fileID: 1492685435813879165}
-  - component: {fileID: -5917252484037868476}
-  - component: {fileID: 752063067399219618}
   - component: {fileID: 1492685435821141694}
   - component: {fileID: -829956321594184112}
   - component: {fileID: 1512428760418971578}
+  - component: {fileID: 3925925350801461810}
+  - component: {fileID: -1621232742544651462}
   m_Layer: 0
   m_Name: DragonInferno
   m_TagString: Untagged
@@ -3026,31 +3026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9e85505f303c04c8d3cbf98fce5499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5917252484037868476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492685435813879166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2fdfbaa0b8a244481663ab426a69ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1492685435821141694}
---- !u!114 &752063067399219618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492685435813879166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95c3fd893166ff4692c4d8abc5e7196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1492685435821141694
 Animator:
   serializedVersion: 4
@@ -3106,6 +3081,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3925925350801461810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492685435813879166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1adc8bac82cf6546b1784638824eb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1621232742544651462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492685435813879166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764142f2ca475d34c86475b5ee73e9cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1492685435821141694}
 --- !u!1 &3100223884418097788
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,6 +3178,26 @@ PrefabInstance:
     - target: {fileID: 697460530578278790, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
       propertyPath: m_Name
       value: UnitCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305475078200669273, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305475078200669273, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305475078200669273, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266510050235717902, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266510050235717902, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6388795830667562601, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
       propertyPath: m_PresetInfoIsWorld

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 790146771580522214}
   - component: {fileID: 5868610964119514423}
   - component: {fileID: 4689582720243456156}
-  - component: {fileID: 8502728852071013742}
-  - component: {fileID: 3230316208381051218}
+  - component: {fileID: 1170955706025161936}
+  - component: {fileID: 4321252404076676925}
+  - component: {fileID: 6360846917707742268}
   - component: {fileID: 7235484806888179710}
   - component: {fileID: 4955464075457805601}
   - component: {fileID: 2287425546397609559}
@@ -83,7 +84,7 @@ MonoBehaviour:
   _parent: {fileID: 6715257482958769065}
   _background: {fileID: 2804708213489569051}
   _progress: {fileID: 9185308791800298411}
---- !u!114 &8502728852071013742
+--- !u!114 &1170955706025161936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,22 +93,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 8243292198567643184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2fdfbaa0b8a244481663ab426a69ae, type: 3}
+  m_Script: {fileID: 11500000, guid: f1adc8bac82cf6546b1784638824eb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4321252404076676925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243292198567643184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9e85505f303c04c8d3cbf98fce5499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6360846917707742268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243292198567643184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764142f2ca475d34c86475b5ee73e9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7235484806888179710}
---- !u!114 &3230316208381051218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8243292198567643184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95c3fd893166ff4692c4d8abc5e7196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &7235484806888179710
 Animator:
   serializedVersion: 4
@@ -173,6 +186,26 @@ PrefabInstance:
     - target: {fileID: 697460530578278790, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
       propertyPath: m_Name
       value: ProgressBarCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305475078200669273, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305475078200669273, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305475078200669273, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266510050235717902, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266510050235717902, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6388795830667562601, guid: 146586d8298125d4ab2c5fc9c8c9f4ff, type: 3}
       propertyPath: m_PresetInfoIsWorld
