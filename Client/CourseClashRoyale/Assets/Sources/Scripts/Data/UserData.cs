@@ -22,6 +22,7 @@ public class Card
     public Card(int id, int progress = 0, int level = 0)
     {
         Id = id;
+        P = progress;
         L = level;
     }
 }

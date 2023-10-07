@@ -5,24 +5,20 @@ using UnityEngine.UI;
 
 public class AuthentifiactionView : MonoBehaviour
 {
-    private const int MinLoginLength = 3;
-
     [SerializeField] private TMP_InputField _login;
     [SerializeField] private TMP_InputField _password;
-    [SerializeField] private TMP_InputField _conirmedPassword;
     [SerializeField] private Button _authorizationButton;
-    [SerializeField] private Button _registrationButton;
+    [SerializeField] private UserInfo _userInfo;
+    [SerializeField] private UserDataProvider _userDataProvider;
 
     private void OnEnable()
     {
         _authorizationButton.onClick.AddListener(TryAuthorize);
-        _registrationButton.onClick.AddListener(TryRegistration);
     }
 
     private void OnDisable()
     {
         _authorizationButton.onClick.RemoveListener(TryAuthorize);
-        _registrationButton.onClick.RemoveListener(TryRegistration);
     }
 
     private void TryAuthorize()
@@ -45,46 +41,6 @@ public class AuthentifiactionView : MonoBehaviour
             .Post(URLProvider.AuthificationFile, data, OnAuthorizationRequestSuccess, OnAuthorizationRequestError);
     }
 
-    private void TryRegistration()
-    {
-        string login = _login.text;
-        string password = _password.text;
-        string confirmedPassword = _conirmedPassword.text;
-
-        if(login.Length < MinLoginLength)
-        {
-            Debug.Log($"Логин должен быть больше {MinLoginLength} символов");
-            return;
-        }
-
-        if(password != confirmedPassword)
-        {
-            Debug.Log($"Пароли не совпадают");
-            return;
-        }
-
-        Dictionary<string, string> data = new()
-        {
-            { "login", login },
-            { "password", password },
-        };
-
-        WWWConnection
-            .Post(URLProvider.RegistrationFile, data, OnRegistrationRequestSuccess, OnAuthorizationRequestError);
-    }
-
-    private void OnRegistrationRequestSuccess(string callback)
-    {
-        if (string.IsNullOrEmpty(callback))
-        {
-            Debug.Log("Регистрация прошла успешно. Теперь авторизуйтесь");
-        }
-        else
-        {
-            Debug.Log(callback);
-        }
-    }
-
     private void OnAuthorizationRequestSuccess(string callback)
     {
         if(int.TryParse(callback, out int id))
@@ -101,6 +57,8 @@ public class AuthentifiactionView : MonoBehaviour
                 URLProvider.DataProviderFile,
                 data,
                 OnGetDataRequestSuccess);
+
+            _userInfo.Set(id);
         }
         else
         {
@@ -123,6 +81,6 @@ public class AuthentifiactionView : MonoBehaviour
             return;
         }
 
-        UserDataProvider.UserData = JsonUtility.FromJson<UserData>(data);
+        _userDataProvider.SetUserData(JsonUtility.FromJson<UserData>(data));
     }
 }
