@@ -16,7 +16,7 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator Load(string sceneName, string payload)
     {
-        yield return SceneManager.LoadSceneAsync("GameMap");
+        yield return SceneManager.LoadSceneAsync(sceneName);
         FindObjectOfType<Bootstrapper>().Init(payload);
     }
 }
