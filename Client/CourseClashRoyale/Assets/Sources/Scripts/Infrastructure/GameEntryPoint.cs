@@ -5,18 +5,19 @@ public class GameEntryPoint : MonoBehaviour
     [SerializeField] private Transform _mainTowerPoint;
     [SerializeField] private Transform _enemyMainTowerPoint;
     [SerializeField] private Camera _camera;
+    [SerializeField] private Canvas _canvas;
 
     public void Init(object data)
     {
-        Debug.Log(data);
         Card[] cards = data as Card[];
-        foreach (var card in cards)
-        {
-            Debug.Log(card.Id);
-        }
 
+        CardsDataSource cardsDataSource = new();
+        CardFactory cardFactory = new(cardsDataSource);
+        GameDeckFactory gameDeckFactory = new(cardFactory);
         BuildingsProvider buildingsProvider = new();
         ProjectilesFactory projectilesFactory = new();
+
+        gameDeckFactory.Create(cards, GameConfig.CardsInTable, _canvas.transform);
 
         UnitsFactory unitsFactory = new();
         unitsFactory.Init(buildingsProvider);

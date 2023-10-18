@@ -20,9 +20,14 @@ public class GameDeckFactory
         GameDeckModel gameDeckModel = new(cardsOnTable);
         GameDeckPresenter gameDeckPresenter = new(gameDeckView, gameDeckModel);
 
-        gameDeckView.Init(_cardFactory);
+        gameDeckView.Init(_cardFactory, cardsOnTable);
         gameDeckModel.InitCards(cards);
 
         return gameDeckView;
+    }
+
+    internal void Create(Card[] cards, object cardsInTable, Transform transform)
+    {
+        throw new System.NotImplementedException();
     }
 }
