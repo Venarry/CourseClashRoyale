@@ -25,9 +25,4 @@ public class GameDeckFactory
 
         return gameDeckView;
     }
-
-    internal void Create(Card[] cards, object cardsInTable, Transform transform)
-    {
-        throw new System.NotImplementedException();
-    }
 }
