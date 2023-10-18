@@ -14,9 +14,9 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(Load(sceneName, payload));
     }
 
-    private IEnumerator Load(string sceneName, string payload)
+    private IEnumerator Load(string sceneName, object data)
     {
         yield return SceneManager.LoadSceneAsync(sceneName);
-        FindObjectOfType<Bootstrapper>().Init(payload);
+        FindObjectOfType<GameEntryPoint>().Init(data);
     }
 }

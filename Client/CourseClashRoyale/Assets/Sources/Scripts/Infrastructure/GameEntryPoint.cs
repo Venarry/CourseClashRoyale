@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Bootstrapper : MonoBehaviour
+public class GameEntryPoint : MonoBehaviour
 {
     [SerializeField] private Transform _mainTowerPoint;
     [SerializeField] private Transform _enemyMainTowerPoint;
     [SerializeField] private Camera _camera;
 
-    public void Init(string deck)
+    public void Init(object data)
     {
-        Debug.Log(deck);
+        Card[] cards = data as Card[];
 
         BuildingsProvider buildingsProvider = new();
         ProjectilesFactory projectilesFactory = new();
@@ -59,6 +59,6 @@ public class Bootstrapper : MonoBehaviour
     private void Awake()
     {
         if(FindObjectOfType<SceneLoader>() == null)
-            Init("awake");
+            Init(null);
     }
 }

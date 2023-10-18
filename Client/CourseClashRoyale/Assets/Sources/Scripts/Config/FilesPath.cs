@@ -10,4 +10,5 @@ public static class FilesPath
     public const string TowerProjectile = "Prefabs/TowerProjectile";
 
     public const string CardView = "Prefabs/Card";
+    public const string GameDeckView = "Prefabs/GameDeck";
 }
