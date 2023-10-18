@@ -6,14 +6,22 @@ public class GameDeckView : MonoBehaviour
 {
     [SerializeField] private Transform _cardParent;
 
+    private GameDeckPresenter _gameDeckPresenter;
     private CardFactory _cardFactory;
+    private UnitsFactory _unitsFactory;
     private Card _activeCard;
     private int _cardsOnTable;
     private readonly Dictionary<Card, CardView> _cards = new();
 
-    public void Init(CardFactory cardFactory, int cardsOnTable)
+    public void Init(
+        GameDeckPresenter gameDeckPresenter,
+        CardFactory cardFactory,
+        UnitsFactory unitsFactory,
+        int cardsOnTable)
     {
+        _gameDeckPresenter = gameDeckPresenter;
         _cardFactory = cardFactory;
+        _unitsFactory = unitsFactory;
         _cardsOnTable = cardsOnTable;
     }
 
@@ -32,6 +40,17 @@ public class GameDeckView : MonoBehaviour
         float selectedSize = 1.2f;
         _cards[_activeCard].gameObject.transform.localScale =
             new(selectedSize, selectedSize, selectedSize);
+    }
+
+    public void TrySpawnHero()
+    {
+        if (_activeCard == null)
+            return;
+
+        if (_gameDeckPresenter.TryReduceMana(_cards[_activeCard].Price))
+        {
+            _unitsFactory.Create(_activeCard.Id);
+        }
     }
 
     public void OnCardsInit(Card[] cards)

@@ -5,13 +5,18 @@ public class UnitsFactory
 {
     private readonly UnitView _barbarianPrefab = Resources.Load<UnitView>(FilesPath.Barbarian);
     private readonly UnitView _dragonInfernoPrefab = Resources.Load<UnitView>(FilesPath.DragonInferno);
-    private BuildingsProvider _buildingsProvider;
+    private readonly BuildingsProvider _buildingsProvider;
 
     private int _reduceMultiplier => GameConfig.LevelStrengthReduceMultiplier;
 
-    public void Init(BuildingsProvider buildingsProvider)
+    public UnitsFactory(BuildingsProvider buildingsProvider)
     {
         _buildingsProvider = buildingsProvider;
+    }
+
+    public void Create(int id)
+    {
+
     }
 
     public void CreateBarbarianStack(Vector3 position,
@@ -63,58 +68,6 @@ public class UnitsFactory
             UnitType.GroundUnit,
             new UnitType[] { UnitType.GroundUnit, UnitType.Tower });
 
-        /*TargetProvider targetProvider = new(unitView);
-
-        BaseUnitAnimator baseUnitAnimator = unitView.GetComponent<BaseUnitAnimator>();
-
-        NavMeshAgent navMeshAgent = unitView.GetComponent<NavMeshAgent>();
-        AttackByAnimation unitAttack = unitView.GetComponent<AttackByAnimation>();
-        unitAttack.Init(targetProvider, baseUnitAnimator, damage, disAttackRange);
-
-        StateMachine stateMachine = unitView.gameObject.AddComponent<StateMachine>();
-
-        HealthModel healthModel = new(targetHealth);
-        HealthPresenter healthPresenter = new(healthModel);
-
-        HealthView healthView = unitView.GetComponent<HealthView>();
-        Color barColor = isFriendly ? GameConfig.FriendlyBarColor : GameConfig.EnemyBarColor;
-        healthView.Init(healthPresenter, progressBarTarget, barCanHide: true, barColor);
-
-        AvailableTargetsProvider availableTargetsProvider = new();
-        availableTargetsProvider.Register(UnitType.GroundUnit, true);
-        availableTargetsProvider.Register(UnitType.Tower, true);
-
-        TargetFinder targetFinder = new(
-            availableTargetsProvider,
-            targetProvider,
-            _buildingsProvider,
-            unitView.transform,
-            isFriendly,
-            agroRadius);
-
-        UnitTargetChaseState targetChaseState = new(
-            stateMachine, 
-            targetProvider,
-            navMeshAgent, 
-            baseUnitAnimator,
-            unitView.transform,
-            targetFinder,
-            attackDistance);
-
-        AttackState<UnitTargetChaseState> attackState = new(
-            stateMachine, 
-            targetProvider,
-            unitAttack, 
-            unitAttack.transform, 
-            unitAttack.transform, 
-            disAttackRange);
-
-        stateMachine.Register(targetChaseState);
-        stateMachine.Register(attackState);
-        stateMachine.Change<UnitTargetChaseState>();
-
-        unitView.Init(isFriendly, type: UnitType.GroundUnit);
-        */
         return unitView;
     }
 

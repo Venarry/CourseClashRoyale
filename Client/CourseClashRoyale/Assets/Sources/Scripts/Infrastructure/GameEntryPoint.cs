@@ -12,15 +12,19 @@ public class GameEntryPoint : MonoBehaviour
         Card[] cards = data as Card[];
 
         CardsDataSource cardsDataSource = new();
-        CardFactory cardFactory = new(cardsDataSource);
-        GameDeckFactory gameDeckFactory = new(cardFactory);
+
         BuildingsProvider buildingsProvider = new();
+
+        CardFactory cardFactory = new(cardsDataSource);
+        UnitsFactory unitsFactory = new(buildingsProvider);
+        GameDeckFactory gameDeckFactory = new(cardFactory, unitsFactory);
         ProjectilesFactory projectilesFactory = new();
 
-        gameDeckFactory.Create(cards, GameConfig.CardsInTable, _canvas.transform);
-
-        UnitsFactory unitsFactory = new();
-        unitsFactory.Init(buildingsProvider);
+        gameDeckFactory.Create(
+            cards,
+            GameConfig.CardsOnTable,
+            10,
+            _canvas.transform);
 
         TowersFactory towersFactory = new();
         towersFactory.Init(buildingsProvider);
