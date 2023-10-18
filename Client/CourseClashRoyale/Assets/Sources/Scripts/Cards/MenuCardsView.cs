@@ -18,7 +18,6 @@ public class MenuCardsView : MonoBehaviour
     public void Init(CardFactory cardFactory)
     {
         _cardFactory = cardFactory;
-        //RefreshCards();
     }
 
     private void OnEnable()
@@ -37,7 +36,6 @@ public class MenuCardsView : MonoBehaviour
 
         Card[] cards = _userDataProvider.AvailableCards;
         Deck[] decks = _userDataProvider.Decks;
-        Debug.Log(_userDataProvider);
 
         int deckCounter = 0;
 
