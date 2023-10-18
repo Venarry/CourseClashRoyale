@@ -30,8 +30,8 @@ public class UserData
             new Card(4),
             new Card(5),
             new Card(6),
-            new Card(7),
-            new Card(8)),
+            new Card(9),
+            new Card(10)),
     };
 }
 

@@ -9,9 +9,9 @@ public class SceneLoader : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void LoadScene(string sceneName, string payload)
+    public void LoadScene(string sceneName, object data)
     {
-        StartCoroutine(Load(sceneName, payload));
+        StartCoroutine(Load(sceneName, data));
     }
 
     private IEnumerator Load(string sceneName, object data)

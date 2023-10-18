@@ -8,7 +8,12 @@ public class GameEntryPoint : MonoBehaviour
 
     public void Init(object data)
     {
+        Debug.Log(data);
         Card[] cards = data as Card[];
+        foreach (var card in cards)
+        {
+            Debug.Log(card.Id);
+        }
 
         BuildingsProvider buildingsProvider = new();
         ProjectilesFactory projectilesFactory = new();

@@ -9,24 +9,37 @@ public class MenuCardsView : MonoBehaviour
 
     [SerializeField] private Transform _deckParent;
     [SerializeField] private Transform _availableCardsParent;
-    [SerializeField] private UserDataProvider _userDataProvider;
 
+    private UserDataProvider _userDataProvider;
     private CardFactory _cardFactory;
     private int _decksCount = 1;
     private int _currentDeckIndex = 0;
+    private bool _isInitialized;
 
-    public void Init(CardFactory cardFactory)
+    public void Init(CardFactory cardFactory, UserDataProvider userDataProvider)
     {
+        gameObject.SetActive(false);
+
         _cardFactory = cardFactory;
+        _userDataProvider = userDataProvider;
+        _isInitialized = true;
+
+        gameObject.SetActive(true);
     }
 
     private void OnEnable()
     {
+        if (_isInitialized == false)
+            return;
+
         _userDataProvider.DataChanged += RefreshCards;
     }
 
     private void OnDisable()
     {
+        if (_isInitialized == false)
+            return;
+
         _userDataProvider.DataChanged -= RefreshCards;
     }
 

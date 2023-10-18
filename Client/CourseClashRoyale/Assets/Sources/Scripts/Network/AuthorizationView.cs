@@ -3,13 +3,19 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class AuthentifiactionView : MonoBehaviour
+public class AuthorizationView : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _login;
     [SerializeField] private TMP_InputField _password;
     [SerializeField] private Button _authorizationButton;
     [SerializeField] private UserInfo _userInfo;
-    [SerializeField] private UserDataProvider _userDataProvider;
+
+    private UserDataProvider _userDataProvider;
+
+    public void Init(UserDataProvider userDataProvider)
+    {
+        _userDataProvider = userDataProvider;
+    }
 
     private void OnEnable()
     {
@@ -81,13 +87,6 @@ public class AuthentifiactionView : MonoBehaviour
 
         UserData userData = JsonUtility.FromJson<UserData>(data);
 
-        foreach (Deck deck in userData.Decks)
-        {
-            foreach (var card in deck.C)
-            {
-                Debug.Log(card.Id);
-            }
-        }
         _userDataProvider.SetUserData(userData);
     }
 }
