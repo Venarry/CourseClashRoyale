@@ -50,6 +50,8 @@ public class GameDeckView : MonoBehaviour
         if (_gameDeckPresenter.TryReduceMana(_cards[_activeCard].Price))
         {
             _unitsFactory.Create(_activeCard.Id);
+            _gameDeckPresenter.RespawnCard(_activeCard);
+            _activeCard = null;
         }
     }
 

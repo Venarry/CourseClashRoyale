@@ -29,4 +29,9 @@ public class GameDeckPresenter
 
     public bool TryReduceMana(int value) =>
         _manaModel.TryReduce(value);
+
+    public void RespawnCard(Card card)
+    {
+        _gameDeckModel.RespawnCard(card);
+    }
 }
