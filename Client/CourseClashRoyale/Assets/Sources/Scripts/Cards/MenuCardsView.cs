@@ -61,7 +61,6 @@ public class MenuCardsView : MonoBehaviour
             }
             else
             {
-                Debug.Log(card.Id);
                 _cardFactory.CreateMenuCard(card, _availableCardsParent);
             }
         }
