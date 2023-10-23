@@ -16,13 +16,12 @@ public class GameDeckFactory
     public GameDeckView Create(
         Card[] cards,
         int cardsOnTable,
-        int maxMana,
+        ManaModel manaModel,
         Transform canvas)
     {
         GameDeckView gameDeckView = Object.Instantiate(_prefab, canvas);
 
         GameDeckModel gameDeckModel = new(cardsOnTable);
-        ManaModel manaModel = new(maxMana);
         GameDeckPresenter gameDeckPresenter = new(
             gameDeckView,
             gameDeckModel,

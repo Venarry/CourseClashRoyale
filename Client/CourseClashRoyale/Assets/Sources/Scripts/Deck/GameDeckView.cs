@@ -42,14 +42,19 @@ public class GameDeckView : MonoBehaviour
             new(selectedSize, selectedSize, selectedSize);
     }
 
-    public void TrySpawnHero()
+    public void TrySpawnHero(Vector3 position)
     {
         if (_activeCard == null)
             return;
 
         if (_gameDeckPresenter.TryReduceMana(_cards[_activeCard].Price))
         {
-            _unitsFactory.Create(_activeCard.Id);
+            _unitsFactory.Create(
+                _activeCard.Id,
+                position,
+                isFriendly: true,
+                _cards[_activeCard].Level);
+
             _gameDeckPresenter.RespawnCard(_activeCard);
             _activeCard = null;
         }
@@ -76,6 +81,7 @@ public class GameDeckView : MonoBehaviour
         if (_cards.ContainsKey(card) == false)
             return;
 
+        Destroy(_cards[card].gameObject);
         _cards.Remove(card);
     }
 

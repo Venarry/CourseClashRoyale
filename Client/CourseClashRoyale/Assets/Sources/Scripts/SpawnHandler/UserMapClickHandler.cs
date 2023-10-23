@@ -21,15 +21,17 @@ public class UserMapClickHandler : MonoBehaviour
 
     private void TrySpawnHero()
     {
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        float rayDistnace = 100;
+
         if(Physics.Raycast(
-            _camera.transform.position,
-            _camera.transform.forward,
-            out RaycastHit hitInfo))
+            ray,
+            out RaycastHit hitInfo,
+            rayDistnace))
         {
             if (hitInfo.collider.TryGetComponent(out SpawnArea spawnArea))
             {
-                Debug.Log("TrySpawn");
-                _gameDeckView.TrySpawnHero();
+                _gameDeckView.TrySpawnHero(hitInfo.point);
             }
         }
     }

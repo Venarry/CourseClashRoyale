@@ -56,13 +56,13 @@ public class MenuCardsView : MonoBehaviour
         {
             if (decks[_currentDeckIndex].Contains(card.Id) && deckCounter < DeckSize)
             {
-                _cardFactory.CreateMenuCard(card.Id, _deckParent);
+                _cardFactory.CreateMenuCard(card, _deckParent);
                 deckCounter++;
             }
             else
             {
                 Debug.Log(card.Id);
-                _cardFactory.CreateMenuCard(card.Id, _availableCardsParent);
+                _cardFactory.CreateMenuCard(card, _availableCardsParent);
             }
         }
     }

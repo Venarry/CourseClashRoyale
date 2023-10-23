@@ -8,6 +8,7 @@ public class CardView : MonoBehaviour
     [SerializeField] private TMP_Text _spawnPrice;
 
     public int Price { get; private set; }
+    public int Level { get; private set; }
 
     public void SetMainImage(Sprite sprite)
     {
@@ -18,5 +19,10 @@ public class CardView : MonoBehaviour
     {
         _spawnPrice.text = price.ToString();
         Price = price;
+    }
+
+    public void SetLevel(int level)
+    {
+        Level = level;
     }
 }

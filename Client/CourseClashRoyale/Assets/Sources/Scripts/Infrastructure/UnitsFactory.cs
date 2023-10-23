@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,42 +8,66 @@ public class UnitsFactory
     private readonly UnitView _barbarianPrefab = Resources.Load<UnitView>(FilesPath.Barbarian);
     private readonly UnitView _dragonInfernoPrefab = Resources.Load<UnitView>(FilesPath.DragonInferno);
     private readonly BuildingsProvider _buildingsProvider;
+    private readonly Transform _rotationTarget;
+
+    private readonly Dictionary<
+        int,
+        Action<Vector3, bool, int>> _units = new();
 
     private int _reduceMultiplier => GameConfig.LevelStrengthReduceMultiplier;
 
-    public UnitsFactory(BuildingsProvider buildingsProvider)
+    public UnitsFactory(BuildingsProvider buildingsProvider, Transform rotationTarget)
     {
         _buildingsProvider = buildingsProvider;
+        _rotationTarget = rotationTarget;
+
+        _units.Add(1, CreateBarbarian);
+        _units.Add(2, CreateBarbarianStack);
+        _units.Add(3, CreateDragonInferno);
+
+        _units.Add(4, CreateBarbarian);
+        _units.Add(5, CreateBarbarianStack);
+        _units.Add(6, CreateDragonInferno);
+        _units.Add(7, CreateBarbarian);
+        _units.Add(8, CreateBarbarianStack);
+        _units.Add(9, CreateDragonInferno);
+        _units.Add(10, CreateDragonInferno);
     }
 
-    public void Create(int id)
+    public void Create(int id, Vector3 position, bool isFriendly, int level)
     {
-
+        _units[id](position, isFriendly, level);
     }
 
     public void CreateBarbarianStack(Vector3 position,
-        Transform progressBarTarget,
         bool isFriendly,
         int level)
     {
         float spawnOffset = 0.5f;
 
-        CreateBarbarian(position + new Vector3(spawnOffset, 0, spawnOffset),
-            progressBarTarget, isFriendly, level);
+        CreateBarbarian(
+            position + new Vector3(spawnOffset, 0, spawnOffset),
+            isFriendly,
+            level);
 
-        CreateBarbarian(position + new Vector3(spawnOffset, 0, -spawnOffset),
-            progressBarTarget, isFriendly, level);
+        CreateBarbarian(
+            position + new Vector3(spawnOffset, 0, -spawnOffset),
+            isFriendly,
+            level);
 
-        CreateBarbarian(position + new Vector3(-spawnOffset, 0, spawnOffset),
-            progressBarTarget, isFriendly, level);
+        CreateBarbarian(
+            position + new Vector3(-spawnOffset, 0, spawnOffset),
+            isFriendly,
+            level);
 
-        CreateBarbarian(position + new Vector3(-spawnOffset, 0, -spawnOffset),
-            progressBarTarget, isFriendly, level);
+        CreateBarbarian(
+            position + new Vector3(-spawnOffset, 0, -spawnOffset),
+            isFriendly,
+            level);
     }
 
-    public UnitView CreateBarbarian(
+    public void CreateBarbarian(
         Vector3 position,
-        Transform progressBarTarget, 
         bool isFriendly,
         int level)
     {
@@ -55,7 +81,7 @@ public class UnitsFactory
         float attackRange = 0.5f;
         float disAttackRange = attackRange + 0.5f;
 
-        UnitView unitView = Object.Instantiate(_barbarianPrefab, position, Quaternion.identity);
+        UnitView unitView = UnityEngine.Object.Instantiate(_barbarianPrefab, position, Quaternion.identity);
         BuildAttackUnit(
             unitView,
             targetDamage,
@@ -64,16 +90,12 @@ public class UnitsFactory
             agroRadius,
             targetHealth,
             isFriendly,
-            progressBarTarget,
             UnitType.GroundUnit,
             new UnitType[] { UnitType.GroundUnit, UnitType.Tower });
-
-        return unitView;
     }
 
-    public UnitView CreateDragonInferno(
+    public void CreateDragonInferno(
         Vector3 position,
-        Transform progressBarTarget,
         bool isFriendly,
         int level)
     {
@@ -87,7 +109,7 @@ public class UnitsFactory
         float attackRange = 3f;
         float disAttackRange = attackRange + 0.5f;
 
-        UnitView unitView = Object.Instantiate(_dragonInfernoPrefab, position, Quaternion.identity);
+        UnitView unitView = UnityEngine.Object.Instantiate(_dragonInfernoPrefab, position, Quaternion.identity);
         BuildAttackUnit(
             unitView,
             targetDamage,
@@ -96,11 +118,8 @@ public class UnitsFactory
             agroRadius,
             targetHealth,
             isFriendly,
-            progressBarTarget,
             UnitType.AirUnit,
             new UnitType[] { UnitType.GroundUnit, UnitType.Tower, UnitType.AirUnit });
-
-        return unitView;
     }
 
     private void BuildAttackUnit(UnitView unitView,
@@ -110,7 +129,6 @@ public class UnitsFactory
         float agroRadius,
         int health,
         bool isFriendly,
-        Transform progressBarTarget,
         UnitType type,
         UnitType[] availableTargets)
     {
@@ -129,7 +147,7 @@ public class UnitsFactory
 
         HealthView healthView = unitView.GetComponent<HealthView>();
         Color barColor = isFriendly ? GameConfig.FriendlyBarColor : GameConfig.EnemyBarColor;
-        healthView.Init(healthPresenter, progressBarTarget, barCanHide: true, barColor);
+        healthView.Init(healthPresenter, _rotationTarget, barCanHide: true, barColor);
 
         AvailableTargetsProvider availableTargetsProvider = new();
 

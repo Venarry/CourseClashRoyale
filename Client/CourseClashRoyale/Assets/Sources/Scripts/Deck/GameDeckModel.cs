@@ -15,7 +15,7 @@ public class GameDeckModel
     }
 
     public event Action<Card[]> CardsInited;
-    public event Action<Card> CardAdded;
+    public event Action<Card> CardShifted;
     public event Action<Card> CardRemoved;
 
     public void InitCards(Card[] cards)
@@ -29,12 +29,12 @@ public class GameDeckModel
     public void RespawnCard(Card card)
     {
         _cards.Remove(card);
+        CardRemoved?.Invoke(card);
 
-        int cardPosition = UnityEngine.Random.Range(_cardsOnTable - 1, _cards.Count);
+        int cardPosition = UnityEngine.Random.Range(_cardsOnTable, _cards.Count);
         _cards.Insert(cardPosition, card);
 
-        CardRemoved?.Invoke(card);
-        CardAdded?.Invoke(card);
+        CardShifted?.Invoke(_cards.ElementAt(_cardsOnTable - 1));
     }
 
     private void Shuffle<T>(IList<T> list)
