@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,8 @@ public class MenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private MenuCardsView _cardsView;
     [SerializeField] private AuthorizationView _authentifiactionView;
+    [SerializeField] private NetworkManager _networkManager;
+
     private SceneLoader _sceneLoader;
     private UserDataProvider _userDataProvider;
 
@@ -30,6 +33,12 @@ public class MenuEntryPoint : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             _sceneLoader.LoadScene("GameMap", _userDataProvider.Decks[0].C);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            _networkManager.StartClient();
+            //SceneManager.LoadScene("OnlineScene");
         }
     }
 }
