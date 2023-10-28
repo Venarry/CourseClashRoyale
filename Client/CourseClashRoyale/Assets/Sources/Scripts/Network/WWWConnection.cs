@@ -23,8 +23,24 @@ public class WWWConnection : MonoBehaviour
     public static void Post(string uri,
         Dictionary<string, string> data,
         Action<string> success = null,
-        Action<string> error = null) =>
+        Action<string> error = null)
+    {
         _instance.StartCoroutine(MakePostRequest(uri, data, success, error));
+    }
+
+    public static void TryGetGameData(int userId, Action<string> callBack)
+    {
+        Dictionary<string, string> data = new()
+            {
+                { "tableName", "clashroyaledata" },
+                { "id", userId.ToString() },
+            };
+
+        WWWConnection.Post(
+            URLProvider.DataProviderFile,
+            data,
+            callBack);
+    }
 
     private static IEnumerator MakePostRequest(
         string uri,

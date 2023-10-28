@@ -8,7 +8,6 @@ public class AuthorizationView : MonoBehaviour
     [SerializeField] private TMP_InputField _login;
     [SerializeField] private TMP_InputField _password;
     [SerializeField] private Button _authorizationButton;
-    [SerializeField] private UserInfo _userInfo;
 
     private UserDataProvider _userDataProvider;
 
@@ -51,7 +50,7 @@ public class AuthorizationView : MonoBehaviour
     {
         if(int.TryParse(callback, out int id))
         {
-            Dictionary<string, string> data = new()
+            /*Dictionary<string, string> data = new()
             {
                 { "tableName", "clashroyaledata" },
                 { "id", id.ToString() },
@@ -60,9 +59,10 @@ public class AuthorizationView : MonoBehaviour
             WWWConnection.Post(
                 URLProvider.DataProviderFile,
                 data,
-                OnGetDataRequestSuccess);
+                OnGetDataRequestSuccess);*/
 
-            _userInfo.Set(id);
+            WWWConnection.TryGetGameData(id, OnGetDataRequestSuccess);
+            UserAuthorizedSettings.Instance.SetAuthorizedSettings(id);
         }
         else
         {
@@ -86,7 +86,6 @@ public class AuthorizationView : MonoBehaviour
         }
 
         UserData userData = JsonUtility.FromJson<UserData>(data);
-
         _userDataProvider.SetUserData(userData);
     }
 }

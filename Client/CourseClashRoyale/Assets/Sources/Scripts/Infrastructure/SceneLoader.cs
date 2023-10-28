@@ -17,6 +17,6 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator Load(string sceneName, object data)
     {
         yield return SceneManager.LoadSceneAsync(sceneName);
-        FindObjectOfType<GameEntryPoint>().Init(data);
+        //FindObjectOfType<GameEntryPoint>().Init(data);
     }
 }

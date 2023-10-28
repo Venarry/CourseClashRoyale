@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MatchmakingHandler : MonoBehaviour
 {
 //#if UNITY_SERVER
+    private const string NameGameMap = "GameMap";
+
     private NetworkManager _networkManager;
 
     private readonly List<ulong> _players = new();
@@ -39,8 +42,11 @@ public class MatchmakingHandler : MonoBehaviour
         if (_players.Contains(id))
             return;
 
+        //_networkManager.ConnectedClients[id].PlayerObject.ne
+
         Debug.Log("added");
         _players.Add(id);
+        TryStartMatch();
     }
 
     private void OnClientDisconnect(ulong id)
@@ -50,6 +56,20 @@ public class MatchmakingHandler : MonoBehaviour
 
         Debug.Log("leaved");
         _players.Add(id);
+    }
+
+    private void TryStartMatch()
+    {
+        if (_players.Count < 2)
+            return;
+
+        StartCoroutine(CreateGameScene());
+    }
+
+    private IEnumerator CreateGameScene()
+    {
+        //yield return SceneManager.LoadSceneAsync(NameGameMap, LoadSceneMode.Additive);
+        yield return _networkManager.SceneManager.LoadScene(NameGameMap, LoadSceneMode.Additive);
     }
 
 //#endif
