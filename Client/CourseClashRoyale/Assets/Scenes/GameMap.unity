@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb1452b2247adc4686ee8427778c775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneBuilder: {fileID: 0}
   _mainTowerPoint: {fileID: 866874594}
   _enemyMainTowerPoint: {fileID: 508956951}
   _userMapClickHandler: {fileID: 1072951930}
@@ -259,8 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 1279398977
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  AlwaysReplicateAsRoot: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1

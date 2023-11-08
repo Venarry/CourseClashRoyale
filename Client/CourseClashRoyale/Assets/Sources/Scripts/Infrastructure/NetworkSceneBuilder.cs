@@ -1,27 +1,30 @@
-using System;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameEntryPoint : NetworkBehaviour
+public class NetworkSceneBuilder : NetworkBehaviour
 {
-    [SerializeField] private Transform _mainTowerPoint;
-    [SerializeField] private Transform _enemyMainTowerPoint;
-    [SerializeField] private UserMapClickHandler _userMapClickHandler;
-    [SerializeField] private Camera _camera;
-    [SerializeField] private Canvas _canvas;
+    private Transform _mainTowerPoint;
+    private UserMapClickHandler _userMapClickHandler;
+    private Camera _camera;
+    private Canvas _canvas;
 
     private TowersFactory _towersFactory;
     private ProjectilesFactory _projectilesFactory;
 
-    public void BuildLevel()
+    public void Init(
+        Transform mainTowerPoint,
+        UserMapClickHandler userMapClickHandler,
+        Camera camera,
+        Canvas canvas)
     {
-        //GetComponent<NetworkObject>().Spawn();
-        //NetworkManager networkManager = FindObjectOfType<NetworkManager>();
+        _mainTowerPoint = mainTowerPoint;
+        _userMapClickHandler = userMapClickHandler;
+        _camera = camera;
+        _canvas = canvas;
+    }
 
-        //if (networkManager.IsServer == true)
-            //return;
-
+    public void Build()
+    {
         UserDataProvider userDataProvider = new();
         userDataProvider.LoadData();
 
@@ -40,46 +43,15 @@ public class GameEntryPoint : NetworkBehaviour
         GameDeckView gameDeckView = gameDeckFactory.Create(
             cards,
             GameConfig.CardsOnTable,
-            manaModel,
+        manaModel,
             _canvas.transform);
 
         _towersFactory = new(buildingsProvider);
 
         _userMapClickHandler.Init(_camera, gameDeckView);
-
-        FastBufferWriter fastBufferWriter = new();
-        FastBufferReader fastBufferReader = new();
-
-        return;
-
-        TowerView enemyMainTower = _towersFactory.CreateTower(
-            _projectilesFactory,
-            _enemyMainTowerPoint.position,
-            _enemyMainTowerPoint.rotation,
-            _camera.transform,
-            isFriendly: false,
-            isMainTower: true);
-
-        unitsFactory.CreateBarbarianStack(
-            new Vector3(0, 0, -10), isFriendly: true, 3);
-
-        unitsFactory.CreateBarbarianStack(
-            new Vector3(0, 0, 10), isFriendly: false, 15);
-
-        unitsFactory.CreateDragonInferno(
-            new Vector3(0, 0, -10), isFriendly: true, 5);
-
-        unitsFactory.CreateDragonInferno(
-            new Vector3(0, 0, 10), isFriendly: false, 15);
     }
 
-    /*private void Awake()
-    {
-        if(FindObjectOfType<SceneLoader>() == null)
-            Init(null);
-    }*/
-
-    public void CreateTowers() 
+    public void CreateTowers()
     {
         Debug.Log("Server");
         TowerView mainTower = _towersFactory.CreateTower(
