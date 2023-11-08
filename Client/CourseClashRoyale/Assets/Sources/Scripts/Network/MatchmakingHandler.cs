@@ -10,8 +10,8 @@ public class MatchmakingHandler : MonoBehaviour
 //#if UNITY_SERVER
     private const string NameGameMap = "GameMap";
 
+    [SerializeField] private PlayerConnectionHandler _playerConnectionHandler;
     private NetworkManager _networkManager;
-
     private readonly List<ulong> _players = new();
 
     private void Awake()
@@ -69,7 +69,15 @@ public class MatchmakingHandler : MonoBehaviour
     private IEnumerator CreateGameScene()
     {
         //yield return SceneManager.LoadSceneAsync(NameGameMap, LoadSceneMode.Additive);
-        yield return _networkManager.SceneManager.LoadScene(NameGameMap, LoadSceneMode.Additive);
+        //yield return _networkManager.SceneManager.LoadScene(NameGameMap, LoadSceneMode.Additive);
+        yield return new WaitForSeconds(0.1f);
+        for (int i = 0; i < _players.Count; i++)
+        {
+            PlayerConnectionHandler playerConnectionHandler =
+                Instantiate(_playerConnectionHandler);
+
+            playerConnectionHandler.GetComponent<NetworkObject>().SpawnWithOwnership(_players[i]);
+        }
     }
 
 //#endif

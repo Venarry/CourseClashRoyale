@@ -35,7 +35,13 @@ public class MenuEntryPoint : MonoBehaviour
             _sceneLoader.LoadScene("GameMap", _userDataProvider.Decks[0].C);
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        /*if (Input.GetKeyDown(KeyCode.S))
+        {
+            _networkManager.StartServer();
+            SceneManager.LoadScene("GameMap");
+        }*/
+
+        if (Input.GetKeyDown(KeyCode.C))
         {
             _networkManager.StartClient();
             //SceneManager.LoadScene("OnlineScene");

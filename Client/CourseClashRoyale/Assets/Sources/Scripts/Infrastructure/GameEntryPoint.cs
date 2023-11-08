@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,28 +11,29 @@ public class GameEntryPoint : NetworkBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Canvas _canvas;
 
-    private void Awake()
+    private TowersFactory _towersFactory;
+    private ProjectilesFactory _projectilesFactory;
+
+    public void BuildLevel()
     {
+        //GetComponent<NetworkObject>().Spawn();
+        //NetworkManager networkManager = FindObjectOfType<NetworkManager>();
+
+        //if (networkManager.IsServer == true)
+            //return;
+
         UserDataProvider userDataProvider = new();
         userDataProvider.LoadData();
 
         Card[] cards = userDataProvider.ActiveDeckCards;
 
-        //Card[] cards = PlayerGameSettings.Cards;
-
-        /*if (data is not Card[] cards)
-        {
-            cards = new Card[0];
-        }*/
-
         CardsDataSource cardsDataSource = new();
-
         BuildingsProvider buildingsProvider = new();
 
         CardFactory cardFactory = new(cardsDataSource);
         UnitsFactory unitsFactory = new(buildingsProvider, _camera.transform);
         GameDeckFactory gameDeckFactory = new(cardFactory, unitsFactory);
-        ProjectilesFactory projectilesFactory = new();
+        _projectilesFactory = new();
 
         ManaModel manaModel = new(10, 8);
 
@@ -41,20 +43,17 @@ public class GameEntryPoint : NetworkBehaviour
             manaModel,
             _canvas.transform);
 
-        TowersFactory towersFactory = new();
-        towersFactory.Init(buildingsProvider);
+        _towersFactory = new(buildingsProvider);
 
         _userMapClickHandler.Init(_camera, gameDeckView);
 
-        CreateTowersServerRpc(new NetworkFactorys()
-        {
-            TowersFactory = towersFactory,
-            ProjectilesFactory = projectilesFactory
-        });
+        FastBufferWriter fastBufferWriter = new();
+        FastBufferReader fastBufferReader = new();
+
         return;
 
-        TowerView enemyMainTower = towersFactory.CreateTower(
-            projectilesFactory,
+        TowerView enemyMainTower = _towersFactory.CreateTower(
+            _projectilesFactory,
             _enemyMainTowerPoint.position,
             _enemyMainTowerPoint.rotation,
             _camera.transform,
@@ -80,51 +79,37 @@ public class GameEntryPoint : NetworkBehaviour
             Init(null);
     }*/
 
-    struct NetworkFactorys : INetworkSerializable
+    public void CreateTowers() 
     {
-        public TowersFactory TowersFactory;
-        public ProjectilesFactory ProjectilesFactory;
-
-        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-        {
-            serializer.SerializeValue(ref TowersFactory);
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void CreateTowersServerRpc(NetworkFactorys networkFactorys)
-    {
-        TowersFactory towersFactory = networkFactorys.TowersFactory;
-        ProjectilesFactory projectilesFactory = networkFactorys.ProjectilesFactory;
-
-        TowerView mainTower = towersFactory.CreateTower(
-            projectilesFactory,
+        Debug.Log("Server");
+        TowerView mainTower = _towersFactory.CreateTower(
+            _projectilesFactory,
             _mainTowerPoint.position,
             _mainTowerPoint.rotation,
             _camera.transform,
             isFriendly: true,
             isMainTower: true);
 
-        mainTower.AddComponent<NetworkObject>().Spawn();
+        mainTower.GetComponent<NetworkObject>().Spawn();
 
-        TowerView leftTower = towersFactory.CreateTower(
-            projectilesFactory,
+        TowerView leftTower = _towersFactory.CreateTower(
+            _projectilesFactory,
             _mainTowerPoint.position + new Vector3(-5, 0, 3),
             _mainTowerPoint.rotation,
             _camera.transform,
             isFriendly: true,
             isMainTower: false);
 
-        leftTower.AddComponent<NetworkObject>().Spawn();
+        leftTower.GetComponent<NetworkObject>().Spawn();
 
-        TowerView rightTower = towersFactory.CreateTower(
-            projectilesFactory,
+        TowerView rightTower = _towersFactory.CreateTower(
+            _projectilesFactory,
             _mainTowerPoint.position + new Vector3(5, 0, 3),
             _mainTowerPoint.rotation,
             _camera.transform,
             isFriendly: true,
             isMainTower: false);
 
-        rightTower.AddComponent<NetworkObject>().Spawn();
+        rightTower.GetComponent<NetworkObject>().Spawn();
     }
 }

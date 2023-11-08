@@ -1,11 +1,14 @@
+using System;
+using Unity.Netcode;
 using UnityEngine;
 
+[Serializable]
 public class TowersFactory
 {
     private readonly TowerView _towerViewPrefab = Resources.Load<TowerView>(FilesPath.MainTower);
-    private BuildingsProvider _buildingsProvider;
+    private readonly BuildingsProvider _buildingsProvider;
 
-    public void Init(BuildingsProvider buildingsProvider)
+    public TowersFactory(BuildingsProvider buildingsProvider)
     {
         _buildingsProvider = buildingsProvider;
     }
@@ -40,7 +43,7 @@ public class TowersFactory
 
         float disAttackRange = attackRange + 0.5f;
 
-        TowerView tower = Object.Instantiate(_towerViewPrefab, position, rotation);
+        TowerView tower = UnityEngine.Object.Instantiate(_towerViewPrefab, position, rotation);
 
         AvailableTargetsProvider availableTargetsProvider = new();
         availableTargetsProvider.Register(UnitType.GroundUnit, true);
@@ -90,7 +93,6 @@ public class TowersFactory
         tower.Init(isFriendly, type: UnitType.Tower);
         _buildingsProvider.Add(tower, isFriendly);
 
-
         if (isMainTower == true)
         {
             TowerInactiveState towerInactiveState = new(
@@ -105,5 +107,11 @@ public class TowersFactory
         }
 
         return tower;
+    }
+
+    public void ServerSerialize(FastBufferWriter fastBufferWriter)
+    {
+        fastBufferWriter.WriteByte(1);
+        //fastBufferWriter.WriteValue
     }
 }

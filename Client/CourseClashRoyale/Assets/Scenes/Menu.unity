@@ -1606,7 +1606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33f2f1dda5b00641bed68b90a6aafc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onlineScene: OnlineScene
+  _onlineScene: GameMap
   _networkManager: {fileID: 40976231}
 --- !u!4 &442866173
 Transform:

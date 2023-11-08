@@ -47,7 +47,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 117
+  controlID: 107
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 118
+  controlID: 108
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 43
+  controlID: 44
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 44
+  controlID: 45
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -566,7 +566,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 0
+    m_VSlider: 1
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -579,7 +579,7 @@ MonoBehaviour:
       y: 21
       width: 737.19995
       height: 445.2
-    m_Scale: {x: 0.28984377, y: 0.28984377}
+    m_Scale: {x: 0.30351564, y: 0.30351564}
     m_Translation: {x: 368.59998, y: 222.6}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -587,12 +587,12 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1271.7195
-      y: -768
-      width: 2543.439
-      height: 1536
+      x: -1214.4348
+      y: -733.4054
+      width: 2428.8696
+      height: 1466.8108
     m_MinimalGUI: 1
-  m_defaultScale: 0.28984377
+  m_defaultScale: 0.30351564
   m_LastWindowPixelSize: {x: 921.49994, y: 582.75}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
@@ -632,7 +632,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 06a1ffffaea4ffffacbcffff9cd2ffff9ed2ffff90d3ffffb2d5ffffaed6ffffe4d6ffff38d7ffff66d8ffff36d9ffff96deffff82dfffffeedfffff86e1ffff26e3ffffa0e4ffff1ae5ffff14e6ffff4ce6ffff7ce6ffff96f8ffff2efbfffff4ffffff3c890000
+      m_ExpandedIDs: 2efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.27538052, y: -0.31471303, z: 0.09580566, w: -0.9035185}
     speed: 2
-    m_Value: {x: -0.27532503, y: -0.3146496, z: 0.09578635, w: -0.9033364}
+    m_Value: {x: -0.2753805, y: -0.314713, z: 0.09580566, w: -0.90351844}
   m_Size:
     m_Target: 12.124355
     speed: 2
@@ -1063,22 +1063,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sources/Scripts/Data
+    - Assets/Sources/Scripts/Infrastructure
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Sources/Scripts/Data
+  - Assets/Sources/Scripts/Infrastructure
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\UnityGames\CourseClashRoyale\Client\CourseClashRoyale
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 271}
-    m_SelectedIDs: 72660000
-    m_LastClickedID: 26226
-    m_ExpandedIDs: 00000000f2650000f4650000f6650000f8650000fa650000fc650000fe65000000ca9a3b
+    scrollPos: {x: 0, y: 317.40002}
+    m_SelectedIDs: 26680000
+    m_LastClickedID: 26662
+    m_ExpandedIDs: 00000000a8670000aa670000ac670000ae670000b0670000b2670000b4670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1106,7 +1106,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f2650000f4650000f6650000f8650000fa650000fc650000fe650000
+    m_ExpandedIDs: 00000000a8670000aa670000ac670000ae670000b0670000b2670000b4670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1131,9 +1131,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: f0290000
+    m_LastClickedInstanceID: 10736
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000285d0000645e0000045e000056ab00004c6c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
